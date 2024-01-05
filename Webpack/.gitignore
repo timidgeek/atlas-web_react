@@ -1,0 +1,6 @@
+# too much
+node_modules
+
+# don't push dist/main.js
+Webpack/task_0/dist/main.js
+Webpack/task_0/dist/main.js.LICENSE.txt
