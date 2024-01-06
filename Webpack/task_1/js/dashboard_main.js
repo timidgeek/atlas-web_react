@@ -17,5 +17,5 @@ updateCounter(
 );
 
 // bind debounce func to click event to handle spam possibility
-const debounced = _.debounce(handleClick, 1000);
+const debounced = _.debounce(handleClick, 500);
 $(".button").on("click", debounced)
