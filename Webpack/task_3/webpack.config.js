@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -6,9 +7,9 @@ module.exports = {
     port: 8564
   },
   entry: {
-    header: '/header/header.js',
-    body: '/body/body.js',
-    footer: '/footer/footer.js'
+    header: './modules/header/header.js',
+    body: './modules/body/body.js',
+    footer: './modules/footer/footer.js'
   },
   output: {
     filename: '[name].bundle.js',
