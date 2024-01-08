@@ -1,10 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
     port: 8564
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   entry: {
     header: './modules/header/header.js',
@@ -35,6 +42,7 @@ module.exports = {
     new HtmlWebpackPlugin({
         hash: true,
         filename: './public/index.html' //relative to root of the application
-    })
+    }),
+    new CleanWebpackPlugin()
 ]
 };
