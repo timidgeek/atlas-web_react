@@ -5,7 +5,8 @@
 }
 
 #logo {
+  /* background-image: url(../assets/favicon_atlas.png); */
+  background-image: url(../assets/atlas_logo.png);
   width: 200px;
   height: 200px;
-  background-image: url(../assets/atlas_logo.png);
 }
