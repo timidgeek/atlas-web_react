@@ -17,7 +17,10 @@ function Notifications() {
           position: 'absolute',
           top: 0,
           right: 0,
-          margin: '1rem'}}
+          margin: '1rem',
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer'}}
         aria-label="Close"
         onClick={() => console.log('Close button has been clicked')}>
           <img src={closeIcon} 

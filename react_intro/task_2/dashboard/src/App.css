@@ -23,6 +23,10 @@
   margin: 5rem;
 }
 
+.App-body input {
+  margin: 1rem;
+}
+
 .App-footer {
   position: absolute;
   bottom: 0;
