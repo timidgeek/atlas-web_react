@@ -1,0 +1,37 @@
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App-logo {
+	width: 20rem;
+	height: 10rem;
+}
+
+.App-header {
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  color: #001947;
+  border-bottom: 3px #6A7AC0 solid;
+}
+
+.App-header h1 {
+	display: inline;
+}
+
+.App-body {
+  margin: 5rem;
+}
+
+.App-footer {
+  position: absolute;
+  bottom: 0;
+  border-top: 3px #6A7AC0 solid;
+  width: 100%;
+}
+
+.App-footer p {
+  text-align: center;
+  font-style: italic;
+}
+
