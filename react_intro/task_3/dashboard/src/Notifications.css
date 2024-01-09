@@ -1,0 +1,16 @@
+.Notifications {
+  border: 2px #6A7AC0 dashed;
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100;
+  margin-left: 1rem;
+  margin-bottom: 5px;
+}
+
+[data-priority="default"] {
+  color: blue;
+}
+
+[data-priority="urgent"] {
+  color: red;
+}
