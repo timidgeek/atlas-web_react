@@ -1,4 +1,4 @@
-import logo from './atlas_logo.png';
+import logo from '../assets/atlas_logo.png';
 import './App.css';
 import { getFullYear, getFooterCopy } from '../utils/utils';
 
