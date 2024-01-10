@@ -8,8 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   devServer: {
+    hot: true,
     port: 3000
   },
   module: {
