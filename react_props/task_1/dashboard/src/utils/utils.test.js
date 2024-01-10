@@ -13,10 +13,10 @@ test('getFooterCopy returns correct string when argument is true', () => {
 
 // test getFooterCopy func when false
 test('getFooterCopy returns correct string when argument is false', () => {
-  expect(getFooterCopy(false)).toBe('Holberton Skool');
+  expect(getFooterCopy(false)).toBe('Holberton School main dashboard');
 });
 
 // test getLatestNotification func
 test('getLatestNotification returns correct string', () => {
-  expect(getLatestNotification()).toBe('<strong>Important notification!</strong>');
+  expect(getLatestNotification()).toBe('<strong>Urgent requirement</strong> - complete by EOD');
 });
