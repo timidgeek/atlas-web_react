@@ -8,12 +8,12 @@ test('getFullYear returns the current year', () => {
 
 // test getFooterCopy func when true
 test('getFooterCopy returns correct string when argument is true', () => {
-  expect(getFooterCopy(true)).toBe('This is the true footer');
+  expect(getFooterCopy(true)).toBe('Holberton School');
 });
 
 // test getFooterCopy func when false
 test('getFooterCopy returns correct string when argument is false', () => {
-  expect(getFooterCopy(false)).toBe('This is the false footer');
+  expect(getFooterCopy(false)).toBe('Holberton Skool');
 });
 
 // test getLatestNotification func
