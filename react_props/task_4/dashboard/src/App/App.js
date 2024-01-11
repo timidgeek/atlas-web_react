@@ -1,4 +1,5 @@
-import React, { useState } from 'react';import './App.css';
+import React  from 'react';
+import './App.css';
 import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -6,21 +7,30 @@ import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 
-function App({ isLoggedIn = false }) {
-  // initialize variable & function with useState
-  // in order to manipulate the userLoggedIn state
-  const [userLoggedIn, setUserLoggedIn] = useState(isLoggedIn);
+function App({ isLoggedIn }) {
 
   return (
     <React.Fragment>
+    <div className="App-header">
+      <Header />
+    </div>
+    <div className="Menu-notifications">
       <Notifications />
+    </div>
       <div className="App">
-        <Header />
-        {userLoggedIn ? <CourseList /> : <Login />}
+        {isLoggedIn ? <CourseList /> : <Login />}
         <Footer />
       </div>
     </React.Fragment>
   );
+}
+
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+}
+
+App.defaultProps = {
+  isLoggedIn: PropTypes.false,
 }
 
 export default App;
