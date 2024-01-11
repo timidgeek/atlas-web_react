@@ -11,7 +11,7 @@ function App({ isLoggedIn }) {
 
   return (
     <React.Fragment>
-    <div className="App-header">
+    <div className="">
       <Header />
     </div>
     <div className="Menu-notifications">
@@ -30,7 +30,7 @@ App.propTypes = {
 }
 
 App.defaultProps = {
-  isLoggedIn: PropTypes.false,
+  isLoggedIn: false,
 }
 
 export default App;
