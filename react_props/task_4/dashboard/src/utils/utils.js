@@ -6,10 +6,10 @@ function getFullYear() {
 // 
 function getFooterCopy(isIndex) {
   if (isIndex) {
-    return "Holberton School";
+    return "Atlas School";
   }
   else {
-    return "Holberton School main dashboard";
+    return "Atlas School main dashboard";
   }
 }
 
