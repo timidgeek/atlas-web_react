@@ -4,11 +4,11 @@ import './Notifications.css';
 const NotificationItem = ({ type, html, value }) => {
   if (html) {
     return (
-      <li data-notification-type={type} dangerouslySetInnerHTML={html}/>
+      <li data-priority={type} dangerouslySetInnerHTML={html}/>
     );
   }
   return (
-    <li data-notification-type={type}>{value}</li>
+    <li data-priority={type}>{value}</li>
   );
 };
 

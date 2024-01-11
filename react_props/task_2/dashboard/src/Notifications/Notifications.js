@@ -9,9 +9,9 @@ function Notifications() {
     <div className="Notifications" style={{ position: 'relative' }}>
       <p>Here is the list of notifications</p>
       <ul>
-        <NotificationItem data-priority="default" value="New course available"/>
-        <NotificationItem data-priority="urgent" value="New resume availabl"/>
-        <NotificationItem data-priority="urgent" dangerouslySetInnerHTML={{__html: getLatestNotification()}}/>
+        <NotificationItem type="default" value="New course available"/>
+        <NotificationItem type="urgent" value="New resume available"/>
+        <NotificationItem type="urgent" html={{__html: getLatestNotification()}}/>
       </ul>
       <button
         style={{
