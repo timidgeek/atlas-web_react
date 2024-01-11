@@ -8,14 +8,13 @@ import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 
 function App({ isLoggedIn }) {
-
   return (
     <React.Fragment>
-    <div className="">
+    <div className="App-header">
       <Header />
-    </div>
-    <div className="Menu-notifications">
-      <Notifications />
+      <div className="Menu-notifications">
+        <Notifications />
+      </div>
     </div>
       <div className="App">
         {isLoggedIn ? <CourseList /> : <Login />}

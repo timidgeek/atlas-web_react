@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 function Notifications({ displayDrawer }) {
   return (
     <React.Fragment>
+      <div className="menuItem"><p>Your notifications</p></div>
       <div className={`Notifications${displayDrawer ? ' show' : ''}`} style={{ position: 'relative' }}>
-        <div className="menuItem"><p>Your notifications</p></div>
         <p>Here is the list of notifications</p>
         <ul>
           <NotificationItem type="default" value="New course available"/>
