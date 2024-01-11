@@ -9,11 +9,18 @@ describe('Notifications Component', () => {
 
   it('renders three list items', () => {
     const wrapper = shallow(<Notifications />);
-    expect(wrapper.find('li')).toHaveLength(3);
+    expect(wrapper.find('NotificationItem')).toHaveLength(3);
   });
 
   it('renders the text "Here is the list of notifications"', () => {
     const wrapper = shallow(<Notifications />);
     expect(wrapper.text()).toContain('Here is the list of notifications');
+  });
+
+  it('renders the correct NotificationItem', () => {
+    const wrapper = shallow(<Notifications />);
+    wrapper.update();
+    const firstItem = wrapper.find('NotificationItem').first();
+    expect(firstItem.html()).toEqual('<li>New course available</li>');
   });
 });
