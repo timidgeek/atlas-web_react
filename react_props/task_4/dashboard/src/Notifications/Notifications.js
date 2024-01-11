@@ -3,10 +3,12 @@ import './Notifications.css';
 import closeIcon from './close-icon.png';
 import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
+import PropTypes from 'prop-types';
 
-function Notifications() {
+function Notifications({ displayDrawer }) {
   return (
-    <div className="Notifications" style={{ position: 'relative' }}>
+    <div className={`Notifications${displayDrawer ? ' show' : ''}`} style={{ position: 'relative' }}>
+      <div className="menuItem">Your notifications</div>
       <p>Here is the list of notifications</p>
       <ul>
         <NotificationItem type="default" value="New course available"/>
@@ -30,6 +32,10 @@ function Notifications() {
       </button>
     </div>
   );
-}
+};
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+};
 
 export default Notifications;

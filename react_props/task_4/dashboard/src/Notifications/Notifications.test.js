@@ -23,4 +23,24 @@ describe('Notifications Component', () => {
     const firstItem = wrapper.find('NotificationItem').first();
     expect(firstItem.html()).toEqual('<li data-priority=\"default\">New course available</li>');
   });
+
+  it('displays menu item when displayDrawer is false', () => {
+    const wrapper = shallow(<Notifications displayDrawer={false} />);
+    expect(wrapper.find('.menuItem').exists()).toBe(true);
+  });
+
+  it('does not display Notifications when displayDrawer is false', () => {
+    const wrapper = shallow(<Notifications displayDrawer={false} />);
+    expect(wrapper.find('div.Notifications').exists()).toBe(false);
+  });
+
+  it('displays menu item when displayDrawer is true', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} />);
+    expect(wrapper.find('.menuItem').exists()).toBe(true);
+  });
+
+  it('displays Notifications when displayDrawer is true', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} />);
+    expect(wrapper.find('div.Notifications').exists()).toBe(true);
+  });
 });
