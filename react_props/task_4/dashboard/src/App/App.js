@@ -17,7 +17,6 @@ function App({ isLoggedIn = false }) {
       <div className="App">
         <Header />
         {userLoggedIn ? <CourseList /> : <Login />}
-        <Login />
         <Footer />
       </div>
     </React.Fragment>

@@ -15,6 +15,6 @@ describe('NotificationItem Component', () => {
   it('renders the correct HTML with dummy html prop', () => {
     const htmlProp = { __html: '<u>test</u>' };
     const wrapper = shallow(<NotificationItem html={htmlProp} />);
-    expect(wrapper.html()).toEqual('<li><u>test</u></li>');
+    expect(wrapper.html()).toEqual('<li data-priority="default"><u>test</u></li>');
   });
 });

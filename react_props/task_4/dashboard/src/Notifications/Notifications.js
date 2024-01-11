@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 function Notifications({ displayDrawer }) {
   return (
     <div className={`Notifications${displayDrawer ? ' show' : ''}`} style={{ position: 'relative' }}>
-      <div className="menuItem">Your notifications</div>
+      <div className="menuItem"><p>Your notifications</p></div>
       <p>Here is the list of notifications</p>
       <ul>
         <NotificationItem type="default" value="New course available"/>
