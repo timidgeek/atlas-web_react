@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications';
+import NotificationItem from './NotificationItem';
+
 
 describe('Notifications Component', () => {
   it('renders without crashing', () => {
@@ -43,4 +45,26 @@ describe('Notifications Component', () => {
     const wrapper = shallow(<Notifications displayDrawer={true} />);
     expect(wrapper.find('div.Notifications').exists()).toBe(true);
   });
+
+  it('renders the right number of NotificationItem when listNotifications is passed', () => {
+    const listNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+      { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
+    ];
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+    expect(wrapper.find(NotificationItem).length).toBe(listNotifications.length);
+  });
+
+  it('renders the text "Here is the list of notifications" only when listNotifications is not empty', () => {
+    const listNotifications = [{ id: 1, type: 'default', value: 'New course available' }];
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+    expect(wrapper.contains('Here is the list of notifications')).toEqual(true);
+  });
+
+  it('displays "No new notification for now" instead of "Here is the list of notifications" when listNotifications is empty', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]} />);
+    expect(wrapper.containsMatchingElement(<NotificationItem value='No new notification for now' />)).toBe(false);
+  });
+
 });

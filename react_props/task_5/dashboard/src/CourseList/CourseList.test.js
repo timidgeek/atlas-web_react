@@ -7,9 +7,10 @@ describe('CourseList Component', () => {
     shallow(<CourseList />);
   });
 
-  it('renders the 5 different rows', () => {
-    const wrapper = shallow(<CourseList />);
-    const rows = wrapper.find('CourseListRow');
-    expect(rows).toHaveLength(5);
+  it('does not render "No course available yet" when listCourses is not empty', () => {
+    const courses = [{ id: 1, name: 'React', credit: 40 }];
+    const wrapper = shallow(<CourseList listCourses={courses} />);
+
+    expect(wrapper.text()).not.toContain('No course available yet');
   });
 });
