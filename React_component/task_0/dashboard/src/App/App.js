@@ -23,10 +23,35 @@ class App extends Component {
     { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
   ]
 
+  // event listener to handle keyboard clicking
+  // using `componentDidMount` lifecycle method
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  // if ctrl+h, perform operations
+  handleKeyDown = (event) => {
+    if (event.ctrlKey && event.key === 'h') {
+      alert('Logging you out');
+      this.logOut();
+    }
+  };
+
+  logOut = () => {
+
+  };
+
   // render method to handle jsx rendering
   render() {
     // initialize props
-    const { listCourses, listNotifications, isLoggedIn } = this.props;
+    const { 
+      listCourses, 
+      listNotifications, 
+      isLoggedIn, 
+      logOut } = this.props;
 
     // jsx
     return (
@@ -48,10 +73,12 @@ class App extends Component {
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.function,
 }
 
 App.defaultProps = {
   isLoggedIn: false,
+  logOut: () => null, // default value for func is 'empty'
 }
 
 export default App;
