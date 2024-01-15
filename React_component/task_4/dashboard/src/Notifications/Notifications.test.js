@@ -84,4 +84,46 @@ describe('Notifications Component', () => {
     consoleSpy.mockRestore();
   });
 
+  // task 11 tests
+
+  it('does not rerender when updating props with the same list', () => {
+    const listNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+      { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
+    ];
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+
+    // record the initial render count
+    const initialRenderCount = wrapper.instance().renderCount;
+
+    // update props with the same list
+    wrapper.setProps({ displayDrawer: true, listNotifications: listNotifications });
+
+    // verify that the component did not rerender
+    expect(wrapper.instance().renderCount).toEqual(initialRenderCount);
+  });
+
+  it('rerenders when updating props with a longer list', () => {
+    const listNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+      { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
+    ];
+    const longerListNotifications = [
+      ...listNotifications,
+      { id: 4, type: 'default', value: 'Another course available' }
+    ];
+
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+
+    // record the initial render count
+    const initialRenderCount = wrapper.instance().renderCount;
+
+    // update props with a longer list
+    wrapper.setProps({ displayDrawer: true, listNotifications: longerListNotifications });
+
+    // verify that the component rerendered
+    expect(wrapper.instance().renderCount).toEqual(initialRenderCount + 1);
+  });
 });
