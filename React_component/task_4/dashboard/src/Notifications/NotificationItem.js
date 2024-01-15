@@ -2,7 +2,10 @@ import React from 'react';
 import './Notifications.css';
 import PropTypes from 'prop-types';
 
-const NotificationItem = ({ type, html, value, markAsRead }) => {
+// add React.memo to make component "pure", meaning
+// it will only update when its props and state
+// are different
+const NotificationItem = React.memo({ type, html, value, markAsRead }) => {
   const handleClick = () => {
     markAsRead();
   };
