@@ -7,6 +7,8 @@ import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 
 class App extends Component {
@@ -59,7 +61,17 @@ class App extends Component {
         </div>
       </div>
         <div className="App">
-          {isLoggedIn ? <CourseList listCourses={listCourses}/> : <Login />}
+          {isLoggedIn ? 
+          <BodySectionWithMarginBottom title="Course list">
+            <CourseList listCourses={listCourses}/>
+          </BodySectionWithMarginBottom>
+          : 
+          <BodySectionWithMarginBottom title="Log in to continue">
+            <Login />
+          </BodySectionWithMarginBottom> }
+          <BodySection title="News from the School">
+            <p>Breaking news! We have rebranded!</p>
+          </BodySection>
           <Footer />
         </div>
       </React.Fragment>

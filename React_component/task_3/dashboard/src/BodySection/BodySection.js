@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './BodySection.css'
 class BodySection extends Component {
   render() {
