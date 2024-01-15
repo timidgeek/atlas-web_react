@@ -67,4 +67,21 @@ describe('Notifications Component', () => {
     expect(wrapper.containsMatchingElement(<NotificationItem value='No new notification for now' />)).toBe(false);
   });
 
+  // task 2 tests
+
+  it('calls console.log with the correct message when markAsRead is called', () => {
+    // mock the console.log function
+    const consoleSpy = jest.spyOn(console, 'log');
+    const wrapper = shallow(<Notifications />);
+
+    // call markAsRead with a mock notification ID
+    wrapper.instance().markAsRead(1);
+
+    // check that console.log was called with the correct message
+    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
+
+    // restore the original console.log function after the test
+    consoleSpy.mockRestore();
+  });
+
 });

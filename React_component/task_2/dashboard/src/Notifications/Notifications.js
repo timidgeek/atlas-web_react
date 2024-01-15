@@ -6,6 +6,17 @@ import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 
 class Notifications extends Component {
+  constructor(props) {
+    super(props);
+    // bind the function markAsRead in your constructor
+    // to avoid unecessary re-rendering
+    this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  markAsRead = (id) => {
+    console.log(`Notification ${id} has been marked as read`)
+  };
+
   render() {
     // initialize props
     const { displayDrawer } = this.props;

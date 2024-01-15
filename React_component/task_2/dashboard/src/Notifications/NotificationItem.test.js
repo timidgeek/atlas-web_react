@@ -17,4 +17,17 @@ describe('NotificationItem Component', () => {
     const wrapper = shallow(<NotificationItem html={htmlProp} />);
     expect(wrapper.html()).toEqual('<li data-priority="default"><u>test</u></li>');
   });
+
+  // task 2 tests
+  it('calls markAsRead with the correct ID when clicked', () => {
+    const markAsReadSpy = jest.fn();
+    // shallow render the NotificationItem component with the spy as a prop
+    const wrapper = shallow(<NotificationItem type="default" value="Test Notification" markAsRead={markAsReadSpy} />);
+    // simulate a click on the component
+    wrapper.find('li').simulate('click');
+
+    // check that markAsRead was called with the correct ID argument
+    expect(markAsReadSpy).toHaveBeenCalledWith();
+    });
+
 });
