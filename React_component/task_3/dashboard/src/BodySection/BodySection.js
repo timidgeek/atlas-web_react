@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './BodySection.css'
 class BodySection extends Component {
   render() {
     return (
@@ -10,5 +10,10 @@ class BodySection extends Component {
     );
   }
 }
+
+BodySection.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node
+};
 
 export default BodySection;
