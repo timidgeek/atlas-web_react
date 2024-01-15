@@ -8,10 +8,14 @@ import PropTypes from 'prop-types';
 class Notifications extends Component {
   constructor(props) {
     super(props);
-    // bind the function markAsRead in your constructor
-    // to avoid unecessary re-rendering
     this.markAsRead = this.markAsRead.bind(this);
   }
+
+  shouldComponentUpdate(nextProps) {
+    // only update if the new listNotifications has a longer list than the previous one
+    return nextProps.listNotifications.length > this.props.listNotifications.length;
+  }
+
 
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`)
