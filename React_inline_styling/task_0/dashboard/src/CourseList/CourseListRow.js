@@ -7,11 +7,11 @@ const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null 
     return (
       <tr>
         {textSecondCell === null ? (
-          <th colSpan="2">{textFirstCell}</th>
+          <th colSpan="2" style={{ backgroundColor: '#deb5b545'}}>{textFirstCell}</th>
         ) : (
           <>
-            <th color="#f5f5f5ab">{textFirstCell}</th>
-            <th>{textSecondCell}</th>
+            <th style={{ backgroundColor: '#f5f5f5ab' }}>{textFirstCell}</th>
+            <th style={{ backgroundColor: '#f5f5f5ab' }}>{textSecondCell}</th>
           </>
         )}
       </tr>
