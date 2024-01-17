@@ -13,7 +13,11 @@ class Notifications extends Component {
 
   shouldComponentUpdate(nextProps) {
     // only update if the new listNotifications has a longer list than the previous one
-    return nextProps.listNotifications.length > this.props.listNotifications.length;
+    // !! to ensure boolean value
+    return !!(
+      nextProps.listNotifications &&
+      nextProps.listNotifications.length > this.props.listNotifications.length
+    );
   }
 
 

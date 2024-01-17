@@ -10,7 +10,7 @@ const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null 
           <th colSpan="2">{textFirstCell}</th>
         ) : (
           <>
-            <th>{textFirstCell}</th>
+            <th color="#f5f5f5ab">{textFirstCell}</th>
             <th>{textSecondCell}</th>
           </>
         )}
