@@ -45,20 +45,18 @@ class App extends Component {
     { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
   ]
 
-  // event listener to handle keyboard clicking
-  // using `componentDidMount` lifecycle method
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   // if ctrl+h, perform operations
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.logOut();
+      this.props.logOut();
     }
   };
 
@@ -68,8 +66,7 @@ class App extends Component {
     const { 
       listCourses, 
       listNotifications, 
-      isLoggedIn, 
-      logOut } = this.props;
+      isLoggedIn } = this.props;
 
     // jsx
     return (

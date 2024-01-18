@@ -1,55 +1,40 @@
 import React from 'react';
-import { render, unmountComponentAtNode, createRoot } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 import WithLogging from './WithLogging';
-
-const mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+import Login from '../Login/Login'
 
 // restore console.log after all tests
 afterAll(() => {
-  mockConsoleLog.mockRestore();
 });
 
 describe('WithLogging HOC', () => {
   // wrapped element is pure HTML
   it('should log mount and unmount messages for pure HTML', () => {
-    const WrappedComponent = () => <p>Test HTML Component</p>;
-    const ComponentWithLogging = WithLogging(WrappedComponent);
+    const mockConsoleLog = jest.spyOn(console, 'log');
+    const Component = () => <p />;
+    const ComponentWithLogging = WithLogging(Component);
 
-    let container = document.createElement('div');
-    document.body.appendChild(container);
+    const wrapper = mount(<ComponentWithLogging />);
 
-    act(() => {
-      render(<ComponentWithLogging />, container);
-    });
+    expect(mockConsoleLog).toHaveBeenCalledWith('Component Component is mounted');
 
-    expect(mockConsoleLog).toHaveBeenCalledWith('Component is mounted on componentDidMount()');
+    wrapper.unmount();
+    expect(mockConsoleLog).toHaveBeenCalledWith('Component Component is going to unmount');
 
-    act(() => {
-      unmountComponentAtNode(container);
-    });
-
-    expect(mockConsoleLog).toHaveBeenCalledWith('Component is going to unmount on componentWillUnmount()');
+    mockConsoleLog.mockRestore();
   });
 
   // wrapped element is the Login component
   it('should log mount and unmount messages for Login component', () => {
-    const Login = () => <div>Login component content</div>;
+    const mockConsoleLog = jest.spyOn(console, 'log');
     const ComponentWithLogging = WithLogging(Login);
 
-    let container = document.createElement('div');
-    document.body.appendChild(container);
+    const wrapper = mount(<ComponentWithLogging />);
+    expect(mockConsoleLog).toHaveBeenCalledWith('Component Login is mounted');
 
-    act(() => {
-      render(<ComponentWithLogging />, container);
-    });
+    wrapper.unmount();
+    expect(mockConsoleLog).toHaveBeenCalledWith('Component Login is going to unmount');
 
-    expect(mockConsoleLog).toHaveBeenCalledWith('Component Login is mounted on componentDidMount()');
-
-    act(() => {
-      unmountComponentAtNode(container);
-    });
-
-    expect(mockConsoleLog).toHaveBeenCalledWith('Component Login is going to unmount on componentWillUnmount()');
+    mockConsoleLog.mockRestore();
   });
 });

@@ -8,20 +8,12 @@ import PropTypes from 'prop-types';
 class NotificationItem extends PureComponent {
 
   render() {
-    const handleClick = () => {
-      this.props.markAsRead(this.props.id);
-    };
+    const { id, type, html, value, markAsRead } = this.props;
 
-    const { type, html, value, markAsRead } = this.props;
-
-    if (html) {
-      
-      return (
-        <li data-priority={type} dangerouslySetInnerHTML={{ __html: html }} onClick={handleClick} />
-      );
-    }
-    return (
-      <li data-priority={type} onClick={handleClick}>{value}</li>
+    return html ? (
+        <li data-priority={type} dangerouslySetInnerHTML={{ __html: html }} onClick={() => markAsRead(id)} />
+      ) : (
+      <li data-priority={type} onClick={() => markAsRead}>{value}</li>
     );
   };
 }

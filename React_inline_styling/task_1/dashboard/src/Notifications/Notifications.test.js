@@ -23,10 +23,9 @@ describe('Notifications Component', () => {
     const wrapper = shallow(<Notifications />);
     wrapper.update();
 
-    const expectedHTML = '<li data-priority="default">New course available</li>';
-    const receivedHTML = String(firstItem.render().html());
-  
-    expect(receivedHTML).toEqual(expectedHTML);  
+    const firstItem = wrapper.find('NotificationItem').first();
+
+    expect(firstItem.html()).toEqual('<li data-priority="default">New course available</li>');
   });
 
   it('displays menu item when displayDrawer is false', () => {

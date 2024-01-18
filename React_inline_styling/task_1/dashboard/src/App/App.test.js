@@ -58,14 +58,14 @@ describe('when isLoggedIn is true', () => {
   it('calls logOut function and displays alert when ctrl+h is pressed', () => {
     const mockLogOut = jest.fn();
     // spy on global alert function
-    const alertSpy = jest.spyOn(global, 'alert');
+    const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
     // render component w/ mockLogOut as prop
     const wrapper = mount(<App logOut={mockLogOut} />);
     // simulate ctrl+h press
     const event = new KeyboardEvent('keydown', { key: 'h', ctrlKey: true });
     window.dispatchEvent(event);
 
-    expect(mockLogout).toHaveBeenCalled();
+    expect(mockLogOut).toHaveBeenCalled();
     expect(alertSpy).toHaveBeenCalledWith('Logging you out');
   });
 });
