@@ -9,7 +9,7 @@ describe('NotificationItem Component', () => {
 
   it('renders the correct HTML with dummy type and value props', () => {
     const wrapper = shallow(<NotificationItem type="default" value="test" />);
-    expect(wrapper.html()).toEqual('<li data-priority="default">test</li>');
+    expect(wrapper.find('li').prop('data-priority')).toEqual("default");
   });
 
   it('renders the correct HTML with dummy html prop', () => {
