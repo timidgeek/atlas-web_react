@@ -1,4 +1,7 @@
 import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 // test getFullYear funct
 test('getFullYear returns the current year', () => {

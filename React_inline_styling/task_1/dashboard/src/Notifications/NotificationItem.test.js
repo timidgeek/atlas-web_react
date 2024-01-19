@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NotificationItem from './NotificationItem';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('NotificationItem Component', () => {
   it('renders without crashing', () => {
@@ -15,7 +18,7 @@ describe('NotificationItem Component', () => {
   it('renders the correct HTML with dummy html prop', () => {
     const htmlProp = { __html: '<u>test</u>' };
     const wrapper = shallow(<NotificationItem html={htmlProp} />);
-    expect(wrapper.html()).toContain('<li data-priority=\"default\">[object Object]</li>');
+    expect(wrapper.html()).toContain('<li data-priority=\"default\"><u>test</u></li>');
   });
 
   // task 2 tests

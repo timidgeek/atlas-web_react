@@ -2,6 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import WithLogging from './WithLogging';
 import Login from '../Login/Login'
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 // restore console.log after all tests
 afterAll(() => {

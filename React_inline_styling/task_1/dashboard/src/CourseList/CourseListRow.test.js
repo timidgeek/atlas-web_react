@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CourseListRow from './CourseListRow';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('CourseListRow Component', () => {
   it('renders one cell with colspan = 2 when isHeader is true and textSecondCell does not exist', () => {

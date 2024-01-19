@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
+import { StyleSheetTestUtils } from 'aphrodite';
 
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('Notifications Component', () => {
   it('renders without crashing', () => {
@@ -25,7 +27,7 @@ describe('Notifications Component', () => {
 
     const firstItem = wrapper.find('NotificationItem').first();
 
-    expect(firstItem.html()).toEqual('<li data-priority="default">[object Object]</li>');
+    expect(firstItem.html()).toEqual('<li data-priority="default">New course available</li>');
   });
 
   it('displays menu item when displayDrawer is false', () => {

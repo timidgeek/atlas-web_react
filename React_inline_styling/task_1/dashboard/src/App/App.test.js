@@ -6,7 +6,9 @@ import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
+import { StyleSheetTestUtils } from 'aphrodite';
 
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('App Component', () => {
   it('renders without crashing', () => {
