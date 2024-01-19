@@ -10,26 +10,6 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 
-// aphrodite styles
-const styles = StyleSheet.create({
-  arial: {
-    fontFamily: 'Arial, Helvetica, sans-serif',
-  },
-  
-  appHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    backgroundColor: '#FFFAE6',
-    borderBottom: '3px #6A7AC0 solid',
-  },
-  
-  menuNotifications: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  }
-});
 
 class App extends Component {
 
@@ -96,6 +76,8 @@ class App extends Component {
   }
 }
 
+// PROP TYPES
+
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,
@@ -105,5 +87,44 @@ App.defaultProps = {
   isLoggedIn: false,
   logOut: () => null, // default value for func is 'empty'
 }
+
+
+// APHRODITE STYLES
+
+const styles = StyleSheet.create({
+  arial: {
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },
+  
+  appHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    backgroundColor: '#FFFAE6',
+    borderBottom: '3px #6A7AC0 solid',
+  },
+  
+  menuNotifications: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
+
+  body: {
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },
+
+  footer: {
+    position: 'absolute',
+      bottom: '0',
+      borderTop: '3px #6A7AC0 solid',
+      width: '100%',
+      backgroundColor: '#FFFAE6',
+      ":p": {
+      textAlign: 'center',
+      fontStyle: 'italic',
+    }
+  },
+});
 
 export default App;
