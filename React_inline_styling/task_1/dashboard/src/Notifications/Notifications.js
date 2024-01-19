@@ -34,7 +34,7 @@ class Notifications extends Component {
 
     return (
       <React.Fragment>
-        <div className="menuItem"><p>Your notifications</p></div>
+        <div className={css(styles.menuItem)}><p>Your notifications</p></div>
         <div className={`Notifications${displayDrawer ? ' show' : ''}`} style={{ position: 'relative' }}>
           <p>Here is the list of notifications</p>
           <ul>
