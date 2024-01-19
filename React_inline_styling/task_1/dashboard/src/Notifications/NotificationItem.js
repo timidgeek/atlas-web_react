@@ -2,16 +2,13 @@ import React, { PureComponent } from 'react';
 import './Notifications.css';
 import PropTypes from 'prop-types';
 
-// add React.memo to make component "pure", meaning
-// it will only update when its props and state
-// are different
 class NotificationItem extends PureComponent {
 
   render() {
     const { id, type, html, value, markAsRead } = this.props;
 
     return html ? (
-        <li data-priority={type} dangerouslySetInnerHTML={{ __html: html }} onClick={() => markAsRead(id)} />
+        <li data-priority={type} dangerouslySetInnerHTML={html} onClick={() => markAsRead(id)} />
       ) : (
       <li data-priority={type} onClick={() => markAsRead}>{value}</li>
     );
@@ -30,7 +27,7 @@ NotificationItem.propTypes = {
 
 NotificationItem.defaultProps = {
   type: 'default',
-  html: {},
+  html: null,
   value: '',
   markAsRead: () => {},
   id: NaN,
