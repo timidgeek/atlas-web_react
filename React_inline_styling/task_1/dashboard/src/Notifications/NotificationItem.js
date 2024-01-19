@@ -10,7 +10,7 @@ class NotificationItem extends PureComponent {
     return html ? (
         <li data-priority={type} dangerouslySetInnerHTML={html} onClick={() => markAsRead(id)} />
       ) : (
-      <li data-priority={type} onClick={() => markAsRead}>{value}</li>
+      <li data-priority={type} onClick={() => markAsRead(id)}>{value}</li>
     );
   };
 }
