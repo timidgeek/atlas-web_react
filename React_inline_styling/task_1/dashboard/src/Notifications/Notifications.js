@@ -9,6 +9,7 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
+    this.renderCount = NaN;
   }
 
   shouldComponentUpdate(nextProps) {
@@ -20,7 +21,6 @@ class Notifications extends Component {
     );
   }
 
-
   markAsRead = (id) => {
     console.log(`Notification ${id} has been marked as read`)
   };
@@ -28,6 +28,9 @@ class Notifications extends Component {
   render() {
     // initialize props
     const { displayDrawer } = this.props;
+    // increment renderCount on every render
+    this.renderCount = isNaN(this.renderCount) ? 1 : this.renderCount + 1;
+
 
     return (
       <React.Fragment>

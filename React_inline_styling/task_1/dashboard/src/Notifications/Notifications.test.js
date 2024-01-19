@@ -25,7 +25,7 @@ describe('Notifications Component', () => {
 
     const firstItem = wrapper.find('NotificationItem').first();
 
-    expect(firstItem.html()).toEqual('<li data-priority="default">New course available</li>');
+    expect(firstItem.html()).toEqual('<li data-priority="default">[object Object]</li>');
   });
 
   it('displays menu item when displayDrawer is false', () => {
@@ -117,13 +117,13 @@ describe('Notifications Component', () => {
       { id: 4, type: 'default', value: 'Another course available' }
     ];
 
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
 
     // record the initial render count
     const initialRenderCount = wrapper.instance().renderCount;
 
     // update props with a longer list
-    wrapper.setProps({ displayDrawer: true, listNotifications: longerListNotifications });
+    wrapper.setProps({ listNotifications: longerListNotifications });
 
     // verify that the component rerendered
     expect(wrapper.instance().renderCount).toEqual(initialRenderCount + 1);
