@@ -1,7 +1,6 @@
 // imports
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -9,27 +8,28 @@ import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
-import { StyleSheet } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite';
 
-// const styles = StyleSheet.create({
-//   App: {
-//     font-family: Arial, Helvetica, sans-serif;
-//   }
+// aphrodite styles
+const styles = StyleSheet.create({
+  arial: {
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },
   
-//   .App-header {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: flex-start;
-//     background-color: #FFFAE6;
-//     border-bottom: 3px #6A7AC0 solid;
-//   }
+  appHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    backgroundColor: '#FFFAE6',
+    borderBottom: '3px #6A7AC0 solid',
+  },
   
-//   .Menu-notifications {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-end;
-//   }
-// })
+  menuNotifications: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  }
+});
 
 class App extends Component {
 
@@ -71,13 +71,13 @@ class App extends Component {
     // jsx
     return (
       <React.Fragment>
-      <div className="App-header">
+      <div className={css(styles.appHeader)}>
         <Header />
-        <div className="Menu-notifications">
+        <div className={css(styles.menuNotifications)}>
           <Notifications listNotifications={listNotifications}  /> 
         </div>
       </div>
-        <div className="App">
+        <div className={css(styles.arial)}>
           {isLoggedIn ? 
           <BodySectionWithMarginBottom title="Course list">
             <CourseList listCourses={listCourses}/>
