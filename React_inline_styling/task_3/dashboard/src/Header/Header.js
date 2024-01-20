@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
   
   headerH1: {
     display: 'inline',
-    fontFamily: 'Arial, Helvetica, sans-serif'
+    fontFamily: 'Arial, Helvetica, sans-serif',
   },
   
   appLogo: {
-    width: '20rem',
-    height: '10rem'
+    maxWidth: '20rem',
+    maxHeight: '10rem',
+    '@media screen and (max-width: 900px)': {
+      maxWidth: '10rem',
+      maxHeight: '5rem',
+    }
   },
 })
 

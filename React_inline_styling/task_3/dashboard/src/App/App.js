@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     backgroundColor: '#FFFAE6',
+    width: '100%',
     borderBottom: '3px #6A7AC0 solid',
   },
   
@@ -120,9 +121,10 @@ const styles = StyleSheet.create({
       borderTop: '3px #6A7AC0 solid',
       width: '100%',
       backgroundColor: '#FFFAE6',
+
       ":p": {
-      textAlign: 'center',
-      fontStyle: 'italic',
+        textAlign: 'center',
+        fontStyle: 'italic',
     }
   },
 });

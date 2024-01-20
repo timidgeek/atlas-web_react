@@ -127,8 +127,7 @@ const styles = StyleSheet.create({
   menuItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginRight: '1rem',
-  },
-  
+    },
 })
 
 export default Notifications;
