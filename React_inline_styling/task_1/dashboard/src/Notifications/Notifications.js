@@ -34,10 +34,11 @@ class Notifications extends Component {
 
     return (
       <React.Fragment>
-        <div className={css(styles.menuItem)}>
+        <div className={css(styles.menuItem)} data-testid="menuItem">
           <p>Your notifications</p>
         </div>
-        <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}>
+        <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}
+             data-testid="notifications">
           <p>Here is the list of notifications</p>
           <ul>
             <NotificationItem 

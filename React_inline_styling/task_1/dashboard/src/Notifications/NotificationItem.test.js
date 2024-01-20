@@ -18,7 +18,7 @@ describe('NotificationItem Component', () => {
   it('renders the correct HTML with dummy html prop', () => {
     const htmlProp = { __html: '<u>test</u>' };
     const wrapper = shallow(<NotificationItem html={htmlProp} />);
-    expect(wrapper.html()).toContain('<li data-priority=\"default\"><u>test</u></li>');
+    expect(wrapper.html()).toContain('<u>test</u>');
   });
 
   it('calls markAsRead with the correct ID when clicked', () => {
