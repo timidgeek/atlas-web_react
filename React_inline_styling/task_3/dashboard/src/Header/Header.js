@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFAE6',
     display: 'flex',
     alignItems: 'center',
-    color: '#001947'
+    color: '#001947',
+    marginRight: '0',
   },
   
   headerH1: {

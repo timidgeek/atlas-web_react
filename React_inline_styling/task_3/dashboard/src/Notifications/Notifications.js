@@ -92,7 +92,11 @@ const styles = StyleSheet.create({
     margin: '1rem',
     background: 'transparent',
     border: 'none',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    zIndex: '1000 !important',
+    '@media (max-width: 900px)': {
+      right: '2rem',
+    }
   },
 
   notifications: {
@@ -100,10 +104,18 @@ const styles = StyleSheet.create({
     border: '2px #6A7AC0 dashed',
     padding: '1rem',
     fontFamily: 'Arial, Helvetica, sans-serif',
-    width: '100',
     marginBottom: '5px',
     marginRight: '1rem',
     position: 'relative',
+    '@media (max-width: 900px)': {
+      border: 'none',
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      zIndex: '998', // higher value means higher to the top, layer-wise
+    }
   },
 
   hideNotifications: {
@@ -134,7 +146,6 @@ const styles = StyleSheet.create({
       position: 'absolute',
       right: '1rem',
       top: '0',
-      // fontSize: '14px',
     }
   },
 })
