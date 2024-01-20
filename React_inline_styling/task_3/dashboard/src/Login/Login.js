@@ -6,7 +6,7 @@ function Login() {
   return (
     <React.Fragment>
       <div className={css(styles.loginMargin)}>
-        <p>Login to access the full dashboard</p>
+        <p className={css(styles.italic)}>Login to access the full dashboard</p>
         <form className={css(styles.form)}>
           <label htmlFor="email">Email:</label>
           <input 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   loginMargin: {
     margin: '5rem',
     '@media screen and (max-width: 900px)': {
-      margin: '1rem'
+      margin: '0rem'
     }
   },
   
@@ -49,6 +49,11 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
     }
+  },
+
+  italic: {
+    fontStyle: 'italic',
+    fontSize: '14px',
   },
 
   okButton: {
