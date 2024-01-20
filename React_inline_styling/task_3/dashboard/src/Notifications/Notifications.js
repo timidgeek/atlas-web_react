@@ -35,7 +35,7 @@ class Notifications extends Component {
     return (
       <React.Fragment>
         <div className={css(styles.menuItem)} data-testid="menuItem">
-          <p>Your notifications</p>
+          <p className={css(styles.notificationsHeader)}>Your notifications</p>
         </div>
         <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}
              data-testid="notifications">
@@ -127,7 +127,16 @@ const styles = StyleSheet.create({
   menuItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginRight: '1rem',
-    },
+  },
+
+  notificationsHeader: {
+    '@media (max-width: 900px)': {
+      position: 'absolute',
+      right: '1rem',
+      top: '0',
+      // fontSize: '14px',
+    }
+  },
 })
 
 export default Notifications;
