@@ -46,7 +46,7 @@ CourseListRow.propTypes = {
 };
 // APHRODITE STYLES:
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
 
   table: {
     marginTop: '20px',
