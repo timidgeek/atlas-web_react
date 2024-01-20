@@ -74,6 +74,13 @@ const styles = StyleSheet.create({
   notificationItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginRight: '1rem',
+    '@media (max-width: 900px)': {
+      fontSize: '20px',
+      listStyle: 'none',
+      borderBottom: '1px solid black',
+      marginBottom: '5px',
+      padding: '10px 8px'
+    }
   },
 
   hideNotifications: {

@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     marginRight: '1rem',
     position: 'relative',
     '@media (max-width: 900px)': {
+      fontSize: '20px',
       border: 'none',
       position: 'fixed',
       top: '0',
