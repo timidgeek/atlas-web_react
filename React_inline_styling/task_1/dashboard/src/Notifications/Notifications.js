@@ -34,24 +34,23 @@ class Notifications extends Component {
 
     return (
       <React.Fragment>
-        <div className={css(styles.menuItem)}><p>Your notifications</p></div>
-        <div className={`Notifications${displayDrawer ? ' show' : ''}`} style={{ position: 'relative' }}>
+        <div className={css(styles.menuItem)}>
+          <p>Your notifications</p>
+        </div>
+        <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}>
           <p>Here is the list of notifications</p>
           <ul>
             <NotificationItem 
               type="default" 
               value="New course available"
-              className={css(styles.defaultPriority)}
               />
             <NotificationItem 
               type="urgent" 
               value="New resume available"
-              className={css(styles.urgentPriority)}
               />
             <NotificationItem 
               type="urgent" 
               html={{__html: getLatestNotification()}}
-              className={css(styles.urgentPriority)}
               />
           </ul>
           <button
@@ -103,7 +102,10 @@ const styles = StyleSheet.create({
     width: '100',
     marginBottom: '5px',
     marginRight: '1rem',
-  
+    position: 'relative',
+  },
+
+  hideNotifications: {
     /* styles for when displayDrawer is false */
     display: 'none',
   },
