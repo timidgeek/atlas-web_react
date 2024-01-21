@@ -30,11 +30,12 @@ class Notifications extends Component {
     const { displayDrawer } = this.props;
     // increment renderCount on every render
     this.renderCount = isNaN(this.renderCount) ? 1 : this.renderCount + 1;
-
+    // handle menu visibility
+    const menuVisibility = displayDrawer ? css(styles.noMenuItem) : css(styles.menuItem);
 
     return (
       <React.Fragment>
-        <div className={css(styles.menuItem)} data-testid="menuItem">
+        <div className={menuVisibility} data-testid="menuItem">
           <p className={css(styles.notificationsHeader)}>Your notifications</p>
         </div>
         <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}
@@ -82,6 +83,29 @@ Notifications.defaultProps = {
   html: null,
 };
 
+// ANIMATIONS
+
+const fadeIn = {
+  'from': {
+      opacity: 0.5,
+    },
+    'to': {
+      opacity: 1,
+    },
+  }
+
+const bounce = {
+    '0%': {
+      transform: 'translateY(0)',
+    },
+    '40%': {
+      transform: 'translateY(-5px)',
+    },
+    '60%': {
+      transform: 'translateY(5px)',
+    },
+  }
+
 // APHRODITE STYLES
 
 const styles = StyleSheet.create({
@@ -106,6 +130,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginBottom: '5px',
     marginRight: '1rem',
+    marginTop: '1rem',
     position: 'relative',
     '@media (max-width: 900px)': {
       fontSize: '20px',
@@ -136,38 +161,24 @@ const styles = StyleSheet.create({
   urgentPriority: {
     color: 'red',
   },
+
   bounce: {
     ':hover': {
-      animation: 'fadeIn 1s, bounce 0.5s 3',
-    },
-    '@keyframes fadeIn': {
-      from: {
-        opacity: 0.5,
-      },
-      to: {
-        opacity: 1,
-      },
-    },
-  
-    '@keyframes bounce': {
-      '0%, 20%, 50%, 80%, 100%': {
-        transform: 'translateY(0)',
-      },
-      '40%': {
-        transform: 'translateY(-5px)',
-      },
-      '60%': {
-        transform: 'translateY(5px)',
-      },
+      animationName: [fadeIn, bounce],
     },
   },
-
-
 
   menuItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginRight: '1rem',
     cursor: 'pointer',
+    ':hover': {
+      animationName: [fadeIn, bounce],
+    },
+  },
+
+  noMenuItem: {
+    display: 'none',
   },
 
   notificationsHeader: {
@@ -175,7 +186,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       right: '1rem',
       top: '0',
-    }
+    },
   },
 })
 
