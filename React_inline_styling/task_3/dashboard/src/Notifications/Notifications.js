@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
       left: '0',
       width: '100%',
       height: '100%',
-      zIndex: '998', // higher value means higher to the top, layer-wise
+      zIndex: '998', 
     }
   },
 
@@ -162,18 +162,15 @@ const styles = StyleSheet.create({
     color: 'red',
   },
 
-  bounce: {
-    ':hover': {
-      animationName: [fadeIn, bounce],
-    },
-  },
-
   menuItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginRight: '1rem',
     cursor: 'pointer',
     ':hover': {
       animationName: [fadeIn, bounce],
+      animationDuration: '2s, 0.5s',
+      animationIterationCount: [1, 3],
+      animationTimingFunction: 'ease-in-out',
     },
   },
 
