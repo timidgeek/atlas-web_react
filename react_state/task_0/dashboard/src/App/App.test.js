@@ -71,3 +71,24 @@ describe('when isLoggedIn is true', () => {
     expect(alertSpy).toHaveBeenCalledWith('Logging you out');
   });
 });
+
+// react_state tests
+describe ('state of App Component', () =>  {
+  it('should have displayDrawer default set to false', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.state('displayDrawer')).toBe(false);
+  });
+
+  it('updates state to true when handleDisplayDrawer is called', () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().handleDisplayDrawer();
+    expect(wrapper.state('displayDrawer')).toBe(true);
+  });
+
+  it('updates state to false when handleHideDrawer is called', () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({ displayDrawer: true });
+    wrapper.instance().handleHideDrawer();
+    expect(wrapper.state('displayDrawer')).toBe(false);
+  });
+});

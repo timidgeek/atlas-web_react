@@ -4,7 +4,6 @@ import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-
 class Notifications extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +12,11 @@ class Notifications extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    // only update if the new listNotifications has a longer list than the previous one
-    // !! to ensure boolean value
-    return !!(
-      nextProps.listNotifications &&
-      nextProps.listNotifications.length > this.props.listNotifications.length
+    // update if the length of list of notifications changes
+    // or if displayDrawer state changes
+    return (
+      nextProps.listNotifications?.length !== this.props.listNotifications?.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
     );
   }
 
@@ -27,15 +26,22 @@ class Notifications extends Component {
 
   render() {
     // initialize props
-    const { displayDrawer } = this.props;
+    const { displayDrawer, handleDisplayDrawer, handleHideDrawer } = this.props;
+
     // increment renderCount on every render
     this.renderCount = isNaN(this.renderCount) ? 1 : this.renderCount + 1;
-
+    
+    // handle menu visibility
+    const menuVisibility = displayDrawer ? css(styles.noMenuItem) : css(styles.menuItem);
 
     return (
       <React.Fragment>
-        <div className={css(styles.menuItem)} data-testid="menuItem">
-          <p className={css(styles.notificationsHeader)}>Your notifications</p>
+        <div className={menuVisibility} data-testid="menuItem">
+          <p 
+            onClick={handleDisplayDrawer}
+            className={css(styles.notificationsHeader)}>
+              Your notifications
+          </p>
         </div>
         <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}
              data-testid="notifications">
@@ -57,7 +63,7 @@ class Notifications extends Component {
           <button
             className={css(styles.closeButton)}
             aria-label="Close"
-            onClick={() => console.log('Close button has been clicked')}>
+            onClick={handleHideDrawer}>
               <img src={closeIcon} 
               alt="Close"
               style={{width: '1rem', height: '1rem'}} />
@@ -72,6 +78,8 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
   html: PropTypes.shape({
     __html: PropTypes.string,
   }),
@@ -79,8 +87,33 @@ Notifications.propTypes = {
 
 Notifications.defaultProps = {
   displayDrawer: false,
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
   html: null,
 };
+
+// ANIMATIONS
+
+const fadeIn = {
+  'from': {
+      opacity: 0.5,
+    },
+    'to': {
+      opacity: 1,
+    },
+  }
+
+const bounce = {
+    '0%': {
+      transform: 'translateY(0)',
+    },
+    '50%': {
+      transform: 'translateY(-5px)',
+    },
+    '100%': {
+      transform: 'translateY(5px)',
+    },
+  }
 
 // APHRODITE STYLES
 
@@ -106,6 +139,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginBottom: '5px',
     marginRight: '1rem',
+    marginTop: '1rem',
     position: 'relative',
     '@media (max-width: 900px)': {
       fontSize: '20px',
@@ -115,7 +149,7 @@ const styles = StyleSheet.create({
       left: '0',
       width: '100%',
       height: '100%',
-      zIndex: '998', // higher value means higher to the top, layer-wise
+      zIndex: '998', 
     }
   },
 
@@ -136,38 +170,21 @@ const styles = StyleSheet.create({
   urgentPriority: {
     color: 'red',
   },
-  bounce: {
-    ':hover': {
-      animation: 'fadeIn 1s, bounce 0.5s 3',
-    },
-    '@keyframes fadeIn': {
-      from: {
-        opacity: 0.5,
-      },
-      to: {
-        opacity: 1,
-      },
-    },
-  
-    '@keyframes bounce': {
-      '0%, 20%, 50%, 80%, 100%': {
-        transform: 'translateY(0)',
-      },
-      '40%': {
-        transform: 'translateY(-5px)',
-      },
-      '60%': {
-        transform: 'translateY(5px)',
-      },
-    },
-  },
-
-
 
   menuItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
     marginRight: '1rem',
     cursor: 'pointer',
+    ':hover': {
+      animationName: [fadeIn, bounce],
+      animationDuration: '2s, 0.5s',
+      animationIterationCount: [1, 3],
+      animationTimingFunction: 'ease-in-out',
+    },
+  },
+
+  noMenuItem: {
+    display: 'none',
   },
 
   notificationsHeader: {
@@ -175,7 +192,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       right: '1rem',
       top: '0',
-    }
+    },
   },
 })
 

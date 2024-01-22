@@ -13,6 +13,28 @@ import { StyleSheet, css } from 'aphrodite';
 
 class App extends Component {
 
+  //constructor
+  constructor(props) {
+    super(props);
+
+   // define default state for displayDrawer
+    this.state = {
+      displayDrawer: false,
+    };
+  }
+
+  // drawer visibility handlers
+  handleDisplayDrawer = () => {
+    this.setState({
+      displayDrawer: true,
+    });
+  }
+  handleHideDrawer = () => {
+    this.setState({
+      displayDrawer: false, 
+    });
+  }
+
   // prop arrays
   listCourses = [
     { id: 1, name: "ES6", credit: 60 },
@@ -25,14 +47,13 @@ class App extends Component {
     { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
   ]
 
+  // if ctrl+h, perform operations
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
-
-  // if ctrl+h, perform operations
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
@@ -47,6 +68,9 @@ class App extends Component {
       listCourses, 
       listNotifications, 
       isLoggedIn } = this.props;
+    
+    // initialize state
+    const { displayDrawer } = this.state;
 
     // jsx
     return (
@@ -54,7 +78,12 @@ class App extends Component {
       <div className={css(styles.appHeader)}>
         <Header />
         <div className={css(styles.menuNotifications)}>
-          <Notifications listNotifications={listNotifications}  /> 
+          <Notifications // pass new func
+            listNotifications={listNotifications}
+            displayDrawer={displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+          /> 
         </div>
       </div>
         <div className={css(styles.arial)}>
@@ -130,5 +159,6 @@ const styles = StyleSheet.create({
     }
   },
 });
+
 
 export default App;
