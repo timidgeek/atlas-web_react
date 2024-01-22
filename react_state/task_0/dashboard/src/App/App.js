@@ -26,12 +26,12 @@ class App extends Component {
   // drawer visibility handlers
   handleDisplayDrawer = () => {
     this.setState({
-      displayDrawer: true,
+      displayDrawer: true
     });
   }
   handleHideDrawer = () => {
     this.setState({
-      displayDrawer: false, 
+      displayDrawer: false 
     });
   }
 
