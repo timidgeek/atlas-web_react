@@ -15,9 +15,11 @@ describe('App Component', () => {
     shallow(<App />);
   });
 
+  // task 0 react_state - had to change test to accomodate new props & functions
+  // passed to Notifications component
   it("contains the Notifications component", () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.containsMatchingElement(<Notifications />)).toEqual(true);
+    expect(wrapper.find('Notifications').exists()).toBe(true);
   });
 
   it("contains the Header component", () => {

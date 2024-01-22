@@ -61,6 +61,7 @@ class Notifications extends Component {
               />
           </ul>
           <button
+            data-testid="closeButton"
             className={css(styles.closeButton)}
             aria-label="Close"
             onClick={handleHideDrawer}>

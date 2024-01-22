@@ -1,10 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { StyleSheetTestUtils } from 'aphrodite';
 
 StyleSheetTestUtils.suppressStyleInjection();
+
 
 describe('Notifications Component', () => {
   it('renders without crashing', () => {
@@ -129,5 +130,27 @@ describe('Notifications Component', () => {
 
     // verify that the component rerendered
     expect(wrapper.instance().renderCount).toEqual(initialRenderCount + 1);
+  });
+
+  // react_state tests
+  it('calls handleDisplayDrawer when clicking on the menu item', () => {
+    const handleDisplayDrawerMock = jest.fn();
+
+    // mount the component with the mock function as a prop
+    const wrapper = mount(<Notifications handleDisplayDrawer={handleDisplayDrawerMock} />);
+
+    // simulate a click on the menu item
+    wrapper.find('[data-testid="menuItem"] p').simulate('click');
+
+    expect(handleDisplayDrawerMock).toHaveBeenCalled();
+  });
+
+  it('calls handleHideDrawer when clicking on the button', () => {
+    const handleHideDrawerMock = jest.fn();
+
+    const wrapper = shallow(<Notifications handleHideDrawer={handleHideDrawerMock} />);
+    wrapper.find('[data-testid="closeButton"]').simulate('click');
+
+    expect(handleHideDrawerMock).toHaveBeenCalled();
   });
 });
