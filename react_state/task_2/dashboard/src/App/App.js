@@ -9,6 +9,7 @@ import CourseList from '../CourseList/CourseList';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
+import { AppContext } from './AppContext'
 
 
 class App extends Component {
@@ -17,11 +18,37 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-   // define default state for displayDrawer
+   // local state
     this.state = {
       displayDrawer: false,
+      user: {
+        email: '',
+        password: '',
+        isLoggedIn: false
+      },
+      logOut: () => {},
     };
   }
+
+  // login/out handlersç
+   logIn = (email, password) => {
+    this.setState({
+      user: {
+        email,
+        password,
+        isLoggedIn: true,
+      },
+    });
+  };
+  logOut = () => {
+    this.setState({
+      user: {
+        email: '',
+        password: '',
+        isLoggedIn: false,
+      },
+    });
+  };
 
   // drawer visibility handlers
   handleDisplayDrawer = () => {
@@ -66,11 +93,10 @@ class App extends Component {
     // initialize props
     const { 
       listCourses, 
-      listNotifications, 
-      isLoggedIn } = this.props;
+      listNotifications } = this.props;
     
     // initialize state
-    const { displayDrawer } = this.state;
+    const { displayDrawer, user } = this.state;
 
     // jsx
     return (
@@ -94,7 +120,7 @@ class App extends Component {
           : 
           <BodySectionWithMarginBottom 
             title="Log in to continue">
-            <Login />
+            <Login logIn={this.logIn} />
           </BodySectionWithMarginBottom> }
           <BodySection 
             title="News from the School">
@@ -109,15 +135,9 @@ class App extends Component {
 
 // PROP TYPES
 
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func,
-}
+App.propTypes = {}
 
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => null, // default value for func is 'empty'
-}
+App.defaultProps = {}
 
 
 // APHRODITE STYLES

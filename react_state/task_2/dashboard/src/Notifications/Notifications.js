@@ -145,9 +145,10 @@ const styles = StyleSheet.create({
     marginBottom: '5px',
     marginRight: '1rem',
     marginTop: '1rem',
-    position: 'relative',
+    display: 'relative',
     '@media (max-width: 900px)': {
       fontSize: '20px',
+      listStyle: 'none',
       border: 'none',
       position: 'fixed',
       overflowY: 'auto',
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
       left: '0',
       width: '100vw',
       height: '100vh',
-      zIndex: '998', 
+      zIndex: '998',
     }
   },
 
