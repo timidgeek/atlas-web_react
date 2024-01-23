@@ -46,7 +46,7 @@ class Notifications extends Component {
         <div className={css(styles.notifications, displayDrawer ? styles.showNotifications : styles.hideNotifications)}
              data-testid="notifications">
           <p>Here is the list of notifications</p>
-          <ul>
+          <ul className={css(styles.noStyle)}>
             <NotificationItem 
               type="default" 
               value="New course available"
@@ -119,6 +119,10 @@ const bounce = {
 // APHRODITE STYLES
 
 const styles = StyleSheet.create({
+  noStyle: {
+    listStyle: 'none'
+  },
+
   closeButton: {
     position: 'absolute',
     top: '0',

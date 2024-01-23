@@ -16,13 +16,13 @@ class NotificationItem extends PureComponent {
         className={css(styles.notificationItem, dynamicStyles)}
         />
       ) : (
-      <li
-        data-priority={type} 
-        onClick={() => markAsRead(id)}
-        className={css(styles.notificationItem, dynamicStyles)}
-      >
-        {value}
-      </li>
+        <li
+          data-priority={type} 
+          onClick={() => markAsRead(id)}
+          className={css(styles.notificationItem, dynamicStyles)}
+        >
+          {value}
+        </li>
     );
   };
 }
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     border: '2px #6A7AC0 dashed',
     padding: '1rem',
     fontFamily: 'Arial, Helvetica, sans-serif',
-    width: '100',
+    width: '100%',
     marginBottom: '5px',
     marginRight: '1rem',
     position: 'relative',
@@ -73,13 +73,12 @@ const styles = StyleSheet.create({
 
   notificationItem: {
     fontFamily: 'Arial, Helvetica, sans-serif',
-    marginRight: '1rem',
     '@media (max-width: 900px)': {
       fontSize: '20px',
       listStyle: 'none',
-      borderBottom: '1px solid black',
-      marginBottom: '5px',
-      padding: '10px 8px'
+      borderBottom: '2px solid black',
+      padding: '10px 8px',
+      width: '100%',
     }
   },
 
