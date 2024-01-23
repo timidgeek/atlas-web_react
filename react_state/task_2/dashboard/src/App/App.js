@@ -30,7 +30,7 @@ class App extends Component {
     };
   }
 
-  // login/out handlersç
+  // login/out handlers
    logIn = (email, password) => {
     this.setState({
       user: {
@@ -113,7 +113,7 @@ class App extends Component {
         </div>
       </div>
         <div className={css(styles.arial)}>
-          {isLoggedIn ? 
+          {user.isLoggedIn ? 
           <BodySectionWithMarginBottom title="Course list">
             <CourseList listCourses={listCourses}/>
           </BodySectionWithMarginBottom>

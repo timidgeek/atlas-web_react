@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
   },
 
   headerBorder: {
-    border: '3px solid #6A7AC0',
+    border: '2px solid #6A7AC0',
   },
 
   tableBorder: {
-    border: '1px solid #6A7AC0',
+    border: '2px solid #6A7AC0',
   },
 
   centerText: {

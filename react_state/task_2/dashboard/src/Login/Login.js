@@ -7,7 +7,6 @@ class Login extends Component {
     super(props);
     // local state
     this.state = {
-      isLoggedIn: false,
       email: '',
       password: '',
       enableSubmit: false
@@ -16,7 +15,9 @@ class Login extends Component {
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
-    this.setState({ isLoggedIn: true });
+    // call logIn function passed as a prop
+    const { email, password } = this.state;
+    this.props.logIn(email, password);
   }
 
   // target email input field
