@@ -21,22 +21,22 @@ class Login extends Component {
 
   // target email input field
   handleChangeEmail = (event) => {
-    this.setState({ 
+    this.setState((prevState) => ({ 
       email: event.target.value, // update with new email value
       // insure both inputs are not empty
       enableSubmit: event.target.value !== '' 
-        && this.state.password !== '' 
-    })
+        && prevState.password !== '' 
+    }))
   }
 
   // target password input field
   handleChangePassword = (event) => {
-    this.setState({ 
+    this.setState((prevState) => ({ 
       password: event.target.value,  // update w new password
       // insure both inputs are not empty
       enableSubmit: event.target.value !== ''
-        && this.state.email !== ''
-    })
+        && prevState.email !== ''
+    }))
   }
 
   render() {
