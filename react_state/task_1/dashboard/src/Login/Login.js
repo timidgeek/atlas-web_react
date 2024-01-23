@@ -1,33 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { render } from 'enzyme';
 
-function Login() {
-  return (
-    <React.Fragment>
-      <div className={css(styles.loginMargin)}>
-        <p className={css(styles.italic)}>Login to access the full dashboard</p>
-        <form className={css(styles.form)}>
-          <label htmlFor="email">Email:</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email"
-            className={css(styles.loginInputMargin)}
-            />
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    // local state
+    this.state = {
+      isLoggedIn: false,
+      email: '',
+      password: '',
+      enableSubmit: false
+    }
+  }
 
-          <label htmlFor="password">Password:</label>
-          <input 
-            type="password" 
-            id="password" 
-            name="password"
-            className={css(styles.loginInputMargin)}/>
-          </form>
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ isLoggedIn: true });
+  }
 
-          <button className={css(styles.okButton)}>OK</button>
-      </div>
-  </React.Fragment>
-  )
+  // target email input field
+  handleChangeEmail = (event) => {
+    this.setState({ 
+      email: event.target.value, // update with new email value
+      // insure both inputs are not empty
+      enableSubmit: event.target.value !== '' 
+        && this.state.password !== '' 
+    })
+  }
+
+  // target password input field
+  handleChangePassword = (event) => {
+    this.setState({ 
+      password: event.target.value,  // update w new password
+      // insure both inputs are not empty
+      enableSubmit: event.target.value !== ''
+        && this.state.email !== ''
+    })
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div className={css(styles.loginMargin)}>
+          <p className={css(styles.italic)}>
+            Login to access the full dashboard
+          </p>
+          <form 
+            className={css(styles.form)}
+            onSubmit={this.handleLoginSubmit}
+          >
+            <label htmlFor="email">Email:</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email"
+              value={this.state.email}
+              className={css(styles.loginInputMargin)}
+              onChange={this.handleChangeEmail}
+              />
+
+            <label htmlFor="password">Password:</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password"
+              value={this.state.password}
+              className={css(styles.loginInputMargin)}
+              onChange={this.handleChangePassword}
+              />
+            <input 
+              type="submit" 
+              value="Login"
+              className={css(styles.okButton)}
+              disabled={!this.state.enableSubmit} // submit only enabled when local state value is true
+              />
+            </form>
+
+        </div>
+    </React.Fragment>
+    )
+  }
 }
 
 // APHRODITE STYLES
@@ -67,6 +120,10 @@ const styles = StyleSheet.create({
     ':hover': {
       color: 'white',
     },
+    '@media screen and (max-width: 900px)': {
+      maxWidth: '70px',
+      right: '5rem'
+    }
   },
 
 })
