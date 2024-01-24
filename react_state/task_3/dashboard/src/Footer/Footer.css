@@ -1,0 +1,23 @@
+.App-footer {
+  position: absolute;
+  display: inline;
+  bottom: 0;
+  border-top: 3px #6A7AC0 solid;
+  width: 100%;
+  background-color: #FFFAE6;
+}
+
+.App-footer p {
+  text-align: center;
+  font-style: italic;
+}
+
+.contact a {
+  font-weight: bold;
+  text-decoration: none; 
+  color: #6A7AC0; 
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
