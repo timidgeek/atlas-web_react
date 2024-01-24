@@ -11,19 +11,6 @@ import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext'
 
-  // prop arrays
-const listCourses = [
-  { id: 1, name: "ES6", credit: 60 },
-  { id: 2, name: "Webpack", credit: 20 },
-  { id: 3, name: "React", credit: 40 },
-];
-
-const listNotifications = [
-  { id: 1, type: "default", value: "New course available" },
-  { id: 2, type: "urgent", value: "New resume available" },
-  { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
-]
-
 class App extends Component {
   //constructor
   constructor(props) {
@@ -37,7 +24,16 @@ class App extends Component {
         isLoggedIn: false
       },
       logOut: () => {},
-      listNotifications: listNotifications 
+      listCourses: [
+        { id: 1, name: "ES6", credit: 60 },
+        { id: 2, name: "Webpack", credit: 20 },
+        { id: 3, name: "React", credit: 40 },
+      ],
+      listNotifications: [
+        { id: 1, type: "default", value: "New course available" },
+        { id: 2, type: "urgent", value: "New resume available" },
+        { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
+      ]
     };
   }
 
@@ -78,8 +74,6 @@ class App extends Component {
       displayDrawer: false 
     });
   }
-
-
 
   // if ctrl+h, perform operations
   componentDidMount() {

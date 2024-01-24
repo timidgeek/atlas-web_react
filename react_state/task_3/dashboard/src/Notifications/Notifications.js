@@ -21,12 +21,18 @@ class Notifications extends Component {
   }
 
   markAsRead = (id) => {
-    console.log(`Notification ${id} has been marked as read`)
+    console.log(`Notification ${id} has been marked as read`);
+    this.props.markNotificationAsRead(id);
   };
 
   render() {
     // initialize props
-    const { displayDrawer, handleDisplayDrawer, handleHideDrawer } = this.props;
+    const { 
+      displayDrawer, 
+      handleDisplayDrawer, 
+      handleHideDrawer, 
+      listNotifications,
+      markNotificationAsRead } = this.props;
 
     // increment renderCount on every render
     this.renderCount = isNaN(this.renderCount) ? 1 : this.renderCount + 1;
@@ -47,18 +53,19 @@ class Notifications extends Component {
              data-testid="notifications">
           <p>Here is the list of notifications</p>
           <ul className={css(styles.noStyle)}>
-            <NotificationItem 
-              type="default" 
-              value="New course available"
-              />
-            <NotificationItem 
-              type="urgent" 
-              value="New resume available"
-              />
-            <NotificationItem 
-              type="urgent" 
-              html={{__html: getLatestNotification()}}
-              />
+            {listNotifications.length === 0 ? (
+                    <NotificationItem value='No new notifications for now' />
+                  ) : (
+                    listNotifications.map(notification => (
+                      <NotificationItem
+                        key={notification.id}
+                        type={notification.type}
+                        value={notification.value}
+                        html={notification.html}
+                        markAsRead={() => markNotificationAsRead(notification.id)}
+                      />
+                    ))
+                  )}
           </ul>
           <button
             data-testid="closeButton"
@@ -83,6 +90,7 @@ Notifications.propTypes = {
   handleHideDrawer: PropTypes.func,
   html: PropTypes.shape({
     __html: PropTypes.string,
+  markNotificationAsRead: PropTypes.func,
   }),
 };
 
