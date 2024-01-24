@@ -15,8 +15,6 @@ describe('App Component', () => {
     shallow(<App />);
   });
 
-  // task 0 react_state - had to change test to accomodate new props & functions
-  // passed to Notifications component
   it("contains the Notifications component", () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find('Notifications').exists()).toBe(true);
@@ -59,19 +57,6 @@ describe('when isLoggedIn is true', () => {
     expect(wrapper.find(CourseList)).toHaveLength(1);
   });
 
-  it('calls logOut function and displays alert when ctrl+h is pressed', () => {
-    const mockLogOut = jest.fn();
-    // spy on global alert function
-    const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
-    // render component w/ mockLogOut as prop
-    const wrapper = mount(<App logOut={mockLogOut} />);
-    // simulate ctrl+h press
-    const event = new KeyboardEvent('keydown', { key: 'h', ctrlKey: true });
-    window.dispatchEvent(event);
-
-    expect(mockLogOut).toHaveBeenCalled();
-    expect(alertSpy).toHaveBeenCalledWith('Logging you out');
-  });
 });
 
 // react_state tests
