@@ -53,7 +53,9 @@ describe('when isLoggedIn is true', () => {
     expect(LoginComponent.exists()).toBe(false);
   });
 
-  it('includes CourseList component', () => {
+  it('includes CourseList component when user logged in', () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({ user: { isLoggedIn: true } });
     expect(wrapper.find(CourseList)).toHaveLength(1);
   });
 
