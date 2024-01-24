@@ -13,7 +13,6 @@ import { AppContext } from './AppContext'
 
 
 class App extends Component {
-
   //constructor
   constructor(props) {
     super(props);
@@ -96,39 +95,40 @@ class App extends Component {
       listNotifications } = this.props;
     
     // initialize state
-    const { displayDrawer, user } = this.state;
+    const { displayDrawer, user, logOut } = this.state;
 
-    // jsx
     return (
-      <React.Fragment>
-      <div className={css(styles.appHeader)}>
-        <Header />
-        <div className={css(styles.menuNotifications)}>
-          <Notifications // pass new func
-            listNotifications={listNotifications}
-            displayDrawer={displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
-          /> 
+      <AppContext.Provider value={{ user, logOut }}>
+        <React.Fragment>
+        <div className={css(styles.appHeader)}>
+          <Header />
+          <div className={css(styles.menuNotifications)}>
+            <Notifications // pass new func
+              listNotifications={listNotifications}
+              displayDrawer={displayDrawer}
+              handleDisplayDrawer={this.handleDisplayDrawer}
+              handleHideDrawer={this.handleHideDrawer}
+            /> 
+          </div>
         </div>
-      </div>
-        <div className={css(styles.arial)}>
-          {user.isLoggedIn ? 
-          <BodySectionWithMarginBottom title="Course list">
-            <CourseList listCourses={listCourses}/>
-          </BodySectionWithMarginBottom>
-          : 
-          <BodySectionWithMarginBottom 
-            title="Log in to continue">
-            <Login logIn={this.logIn} />
-          </BodySectionWithMarginBottom> }
-          <BodySection 
-            title="News from the School">
-            <p>Breaking news! We have rebranded!</p>
-          </BodySection>
-          <Footer />
-        </div>
-      </React.Fragment>
+          <div className={css(styles.arial)}>
+            {user.isLoggedIn ? 
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses}/>
+            </BodySectionWithMarginBottom>
+            : 
+            <BodySectionWithMarginBottom 
+              title="Log in to continue">
+              <Login logIn={this.logIn} />
+            </BodySectionWithMarginBottom> }
+            <BodySection 
+              title="News from the School">
+              <p>Breaking news! We have rebranded!</p>
+            </BodySection>
+            <Footer />
+          </div>
+        </React.Fragment>
+    </AppContext.Provider>
     );
   }
 }
