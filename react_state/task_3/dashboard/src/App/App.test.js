@@ -97,4 +97,14 @@ describe ('state of App Component', () =>  {
     wrapper.instance().logOut();
     expect(wrapper.state('user').isLoggedIn).toBe(false);
   });
+
+  // react_state task 3 test
+  it('markNotificationAsRead works as expected', () => {
+    const wrapper = shallow(<App />);
+    const notificationLength = wrapper.state('listNotifications').length;
+    wrapper.instance().markNotificationAsRead(1);
+
+    expect(wrapper.state('listNotifications').length).toBe(notificationLength - 1);
+    expect(wrapper.state('listNotifications').some(n => n.id === 1)).toBe(false);
+});
 });

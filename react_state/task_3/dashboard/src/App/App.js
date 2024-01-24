@@ -11,12 +11,23 @@ import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext'
 
+  // prop arrays
+const listCourses = [
+  { id: 1, name: "ES6", credit: 60 },
+  { id: 2, name: "Webpack", credit: 20 },
+  { id: 3, name: "React", credit: 40 },
+];
+
+const listNotifications = [
+  { id: 1, type: "default", value: "New course available" },
+  { id: 2, type: "urgent", value: "New resume available" },
+  { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
+]
 
 class App extends Component {
   //constructor
   constructor(props) {
     super(props);
-
    // local state
     this.state = {
       displayDrawer: false,
@@ -26,7 +37,14 @@ class App extends Component {
         isLoggedIn: false
       },
       logOut: () => {},
+      listNotifications: listNotifications 
     };
+  }
+
+  markNotificationAsRead = (id) => {
+    this.setState({ // filter out notification with specified id
+      listNotifications: this.state.listNotifications.filter(
+        (notification) => notification.id !== id) });
   }
 
   // login/out handlers
@@ -61,17 +79,7 @@ class App extends Component {
     });
   }
 
-  // prop arrays
-  listCourses = [
-    { id: 1, name: "ES6", credit: 60 },
-    { id: 2, name: "Webpack", credit: 20 },
-    { id: 3, name: "React", credit: 40 },
-  ];
-  listNotifications = [
-    { id: 1, type: "default", value: "New course available" },
-    { id: 2, type: "urgent", value: "New resume available" },
-    { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
-  ]
+
 
   // if ctrl+h, perform operations
   componentDidMount() {
@@ -91,11 +99,10 @@ class App extends Component {
   render() {
     // initialize props
     const { 
-      listCourses, 
-      listNotifications } = this.props;
+      listCourses,} = this.props;
     
     // initialize state
-    const { displayDrawer, user } = this.state;
+    const { displayDrawer, user, listNotifications } = this.state;
 
     return (
       <AppContext.Provider value={{ user, logOut: this.logOut }}>
@@ -108,6 +115,7 @@ class App extends Component {
               displayDrawer={displayDrawer}
               handleDisplayDrawer={this.handleDisplayDrawer}
               handleHideDrawer={this.handleHideDrawer}
+              markNotificationAsRead={this.markNotificationAsRead}
             /> 
           </div>
         </div>

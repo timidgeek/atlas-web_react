@@ -28,7 +28,7 @@ const CourseList = ({ listCourses }) => {
           textFirstCell="No course available yet" 
           />
         ) : (
-          listCourses.map(course => (
+          listCourses.map((course) => (
             <CourseListRow
               key={course.id}
               isHeader={false}
