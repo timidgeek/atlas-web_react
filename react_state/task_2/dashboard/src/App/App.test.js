@@ -80,4 +80,21 @@ describe ('state of App Component', () =>  {
     wrapper.instance().handleHideDrawer();
     expect(wrapper.state('displayDrawer')).toBe(false);
   });
+
+  // react_state task 2 tests
+  it('updates user state correctly when logIn is called', () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().logIn('test@example.com', 'password');
+    expect(wrapper.state('user').isLoggedIn).toBe(true);
+    expect(wrapper.state('user').email).toBe('test@example.com');
+  });
+
+  it('updates user state correctly when logOut is called', () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().logIn('test@example.com', 'password');
+    expect(wrapper.state('user').isLoggedIn).toBe(true);
+
+    wrapper.instance().logOut();
+    expect(wrapper.state('user').isLoggedIn).toBe(false);
+  });
 });

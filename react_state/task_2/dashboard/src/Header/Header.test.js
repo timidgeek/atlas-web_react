@@ -24,4 +24,34 @@ describe('Header component', () => {
     expect(wrapper.find('h1').exists()).toBe(true);
   });
 
+  // react_state task 2 tests
+
+  it('mounts header with a default context value and does not create logoutSection', () => {
+    const wrapper = mount(
+      <AppContext.Provider value={{ user: { isLoggedIn: false } }}>
+        <Header />
+      </AppContext.Provider>
+    );
+    expect(wrapper.find('#logoutSection').length).toBe(0);
+});
+
+it('mounts header with user isLoggedIn and shows the logoutSection', () => {
+    const wrapper = mount(
+      <AppContext.Provider value={{ user: { isLoggedIn: true, email: 'user@test.com' } }}>
+        <Header />
+      </AppContext.Provider>
+    );
+    expect(wrapper.find('#logoutSection').length).toBe(1);
+});
+
+it('calls the logOut function when the logout link is clicked', () => {
+    const logOutSpy = jest.fn();
+    const wrapper = mount(
+      <AppContext.Provider value={{ user: { isLoggedIn: true, email: 'user@test.com' }, logOut: logOutSpy }}>
+        <Header />
+      </AppContext.Provider>
+    );
+    wrapper.find('span').simulate('click');
+    expect(logOutSpy).toHaveBeenCalled();
+});
 });
