@@ -95,10 +95,10 @@ class App extends Component {
       listNotifications } = this.props;
     
     // initialize state
-    const { displayDrawer, user, logOut } = this.state;
+    const { displayDrawer, user } = this.state;
 
     return (
-      <AppContext.Provider value={{ user, logOut }}>
+      <AppContext.Provider value={{ user, logOut: this.logOut }}>
         <React.Fragment>
         <div className={css(styles.appHeader)}>
           <Header />
