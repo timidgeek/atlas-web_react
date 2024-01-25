@@ -7,15 +7,12 @@ const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null 
   
   useEffect(() => {
     // apply rowChecked style when isChecked is true
-    const rowElement = document.getElementById(`row-${textFirstCell}`);
-    if (rowElement) {
-      if (isChecked) {
-        rowElement.classList.add(css(styles.rowChecked));
+   if (isChecked) {
+        setIsChecked(true);
       } else {
-        rowElement.classList.remove(css(styles.rowChecked));
+        setIsChecked(false);
       }
-    }
-  }, [isChecked, textFirstCell]);
+  }, [isChecked]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -46,7 +43,7 @@ const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null 
     );
   } else {
     return (
-      <tr id={`row-${textFirstCell}`} className={css(styles.tableBorder, styles.cellSpacing)}>
+      <tr className={css(styles.tableBorder, styles.cellSpacing,  isChecked && styles.rowChecked)}>
         <td className={css(styles.cellSpacing)}>
           <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
           {textFirstCell}

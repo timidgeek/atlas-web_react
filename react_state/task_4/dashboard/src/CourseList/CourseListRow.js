@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  
+  useEffect(() => {
+    // apply rowChecked style when isChecked is true
+   if (isChecked) {
+        setIsChecked(true);
+      } else {
+        setIsChecked(false);
+      }
+  }, [isChecked]);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   if (isHeader) {
     return (
       <tr>
@@ -28,9 +43,14 @@ const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null 
     );
   } else {
     return (
-      <tr>
-        <td className={css(styles.tableBorder, styles.cellSpacing)}>{textFirstCell}</td>
-        <td className={css(styles.tableBorder, styles.cellSpacing)}>{textSecondCell}</td>
+      <tr className={css(styles.tableBorder, styles.cellSpacing,  isChecked && styles.rowChecked)}>
+        <td className={css(styles.cellSpacing)}>
+          <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+          {textFirstCell}
+        </td>
+        <td className={css(styles.tableBorder, styles.cellSpacing)}>
+          {textSecondCell}
+          </td>
       </tr>
     )
   }

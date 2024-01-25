@@ -91,12 +91,8 @@ class App extends Component {
 
   // render method to handle jsx rendering
   render() {
-    // initialize props
-    const { 
-      listCourses,} = this.props;
-    
     // initialize state
-    const { displayDrawer, user, listNotifications } = this.state;
+    const { displayDrawer, user, listNotifications, listCourses } = this.state;
 
     return (
       <AppContext.Provider value={{ user, logOut: this.logOut }}>
