@@ -23,17 +23,14 @@ const CourseList = ({ listCourses }) => {
       </thead>
       <tbody>
         {listCourses.length === 0 ? (
-          <CourseListRow 
-          isHeader={false} 
-          textFirstCell="No course available yet" 
-          />
+          <CourseListRow textFirstCell="No course available yet" />
         ) : (
-          listCourses.map((course) => (
+          listCourses.map(course => (
             <CourseListRow
               key={course.id}
               isHeader={false}
               textFirstCell={course.name}
-              textSecondCell={course.credit.toString()}
+              textSecondCell={course.credit}
               />
           ))
         )}
@@ -43,7 +40,7 @@ const CourseList = ({ listCourses }) => {
 };
 
 // PROP TYPES:
-
+ 
 CourseList.propTypes = {
   listCourses: PropTypes.arrayOf(CourseShape),
 };

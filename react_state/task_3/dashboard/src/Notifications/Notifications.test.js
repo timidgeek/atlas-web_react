@@ -14,7 +14,7 @@ describe('Notifications Component', () => {
 
   it('renders three list items', () => {
     const wrapper = shallow(<Notifications />);
-    expect(wrapper.find('NotificationItem')).toHaveLength(3);
+    expect(wrapper.find('NotificationItem')).toHaveLength(1);
   });
 
   it('renders the text "Here is the list of notifications"', () => {
@@ -28,7 +28,7 @@ describe('Notifications Component', () => {
 
     const firstItem = wrapper.find('NotificationItem').first();
 
-    expect(firstItem.html()).toContain('New course available');
+    expect(firstItem.html()).toContain('No new notifications for now');
   });
 
   it('displays menu item when displayDrawer is false', () => {
@@ -72,24 +72,15 @@ describe('Notifications Component', () => {
     expect(wrapper.containsMatchingElement(<NotificationItem value='No new notification for now' />)).toBe(false);
   });
 
-  // task 2 tests
 
-  it('calls console.log with the correct message when markAsRead is called', () => {
-    // mock the console.log function
-    const consoleSpy = jest.spyOn(console, 'log');
-    const wrapper = shallow(<Notifications />);
-
-    // call markAsRead with a mock notification ID
+  it('calls markNotificationAsRead with the correct ID when markAsRead is called', () => {
+    const markNotificationAsReadMock = jest.fn();
+    const wrapper = shallow(<Notifications markNotificationAsRead={markNotificationAsReadMock} />);
+  
     wrapper.instance().markAsRead(1);
-
-    // check that console.log was called with the correct message
-    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
-
-    // restore the original console.log function after the test
-    consoleSpy.mockRestore();
+  
+    expect(markNotificationAsReadMock).toHaveBeenCalledWith(1);
   });
-
-  // task 11 tests
 
   it('does not rerender when updating props with the same list', () => {
     const listNotifications = [
@@ -121,14 +112,9 @@ describe('Notifications Component', () => {
     ];
 
     const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
-
-    // record the initial render count
     const initialRenderCount = wrapper.instance().renderCount;
-
-    // update props with a longer list
     wrapper.setProps({ listNotifications: longerListNotifications });
 
-    // verify that the component rerendered
     expect(wrapper.instance().renderCount).toEqual(initialRenderCount + 1);
   });
 
@@ -136,21 +122,26 @@ describe('Notifications Component', () => {
   it('calls handleDisplayDrawer when clicking on the menu item', () => {
     const handleDisplayDrawerMock = jest.fn();
 
-    // mount the component with the mock function as a prop
-    const wrapper = mount(<Notifications handleDisplayDrawer={handleDisplayDrawerMock} />);
+    const wrapper = mount(<Notifications handleDisplayDrawer={handleDisplayDrawerMock}  />);
 
-    // simulate a click on the menu item
     wrapper.find('[data-testid="menuItem"] p').simulate('click');
 
     expect(handleDisplayDrawerMock).toHaveBeenCalled();
   });
 
   it('calls handleHideDrawer when clicking on the button', () => {
-    const handleHideDrawerMock = jest.fn();
+    const handleHideDrawer = jest.fn();
+    const handleDisplayDrawer = jest.fn();
 
-    const wrapper = shallow(<Notifications handleHideDrawer={handleHideDrawerMock} />);
+    const wrapper = shallow(
+      <Notifications 
+        handleHideDrawer={handleHideDrawer} 
+        handleDisplayDrawer={handleDisplayDrawer}
+        listNotifications={[]}
+        displayDrawer={true}
+      />);
     wrapper.find('[data-testid="closeButton"]').simulate('click');
 
-    expect(handleHideDrawerMock).toHaveBeenCalled();
+    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });

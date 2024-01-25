@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import closeIcon from './close-icon.png';
 import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-class Notifications extends Component {
+class Notifications extends PureComponent {
   constructor(props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
     this.renderCount = NaN;
-  }
-
-  shouldComponentUpdate(nextProps) {
-    // update if the length of list of notifications changes
-    // or if displayDrawer state changes
-    return (
-      nextProps.listNotifications?.length !== this.props.listNotifications?.length ||
-      nextProps.displayDrawer !== this.props.displayDrawer
-    );
   }
 
   markAsRead = (id) => {
@@ -53,7 +44,7 @@ class Notifications extends Component {
              data-testid="notifications">
           <p>Here is the list of notifications</p>
           <ul className={css(styles.noStyle)}>
-            {listNotifications.length === 0 ? (
+            {listNotifications && listNotifications.length === 0 ? (
                     <NotificationItem value='No new notifications for now' />
                   ) : (
                     listNotifications.map(notification => (
@@ -99,6 +90,7 @@ Notifications.defaultProps = {
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
   html: null,
+  listNotifications: []
 };
 
 // ANIMATIONS
