@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "aphrodite": "^2.4.0",
+    "normalizr": "^3.6.2",
     "prop-types": "^15.8.1",
     "web-vitals": "^3.5.1"
   },
