@@ -1,26 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  
-  useEffect(() => {
-    // apply rowChecked style when isChecked is true
-    const rowElement = document.getElementById(`row-${textFirstCell}`);
-    if (rowElement) {
-      if (isChecked) {
-        rowElement.classList.add(css(styles.rowChecked));
-      } else {
-        rowElement.classList.remove(css(styles.rowChecked));
-      }
-    }
-  }, [isChecked, textFirstCell]);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
   if (isHeader) {
     return (
       <tr>
@@ -46,14 +28,9 @@ const CourseListRow = ({ isHeader = false, textFirstCell, textSecondCell = null 
     );
   } else {
     return (
-      <tr id={`row-${textFirstCell}`} className={css(styles.tableBorder, styles.cellSpacing)}>
-        <td className={css(styles.cellSpacing)}>
-          <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-          {textFirstCell}
-        </td>
-        <td className={css(styles.tableBorder, styles.cellSpacing)}>
-          {textSecondCell}
-          </td>
+      <tr>
+        <td className={css(styles.tableBorder, styles.cellSpacing)}>{textFirstCell}</td>
+        <td className={css(styles.tableBorder, styles.cellSpacing)}>{textSecondCell}</td>
       </tr>
     )
   }
