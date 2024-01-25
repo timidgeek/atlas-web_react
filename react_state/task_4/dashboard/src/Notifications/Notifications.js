@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '0',
     right: '0',
-    margin: '1rem',
+    margin: '2.5rem',
     background: 'transparent',
     border: 'none',
     cursor: 'pointer',
