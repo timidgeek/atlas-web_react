@@ -1,0 +1,8 @@
+import * as notificationData from '../../notifications.json';
+
+const getAllNotificationsByUser = (userId) => {
+  // filter the notifications based on the author id
+  return notificationData.default.filter((notification) => notification.author.id === userId).map(notification  => notification.context);
+};
+
+export default getAllNotificationsByUser;
