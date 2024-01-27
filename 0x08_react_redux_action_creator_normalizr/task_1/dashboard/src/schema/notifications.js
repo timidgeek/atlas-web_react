@@ -14,18 +14,24 @@ const normalizedData = normalize(notificationData.default, [notification]);
 
 const getAllNotificationsByUser = (userId) => {
   // extract normalied entities and result
-  const { entities, result } = normalizedData;
+  const { entities } = normalizedData;
 
   // check if notifications are present and result is valid
-  const userNotificationIds = entities.notifications && entities.notifications[result]
-  ? Object.values(entities.notifications[result]).filter((notificationId) =>
-      entities.notifications[notificationId].author === 
-        userId) : [];
+  const notificationId = Object.values(entities.notifications || {});
+  const userNotifications = notificationId.filter((notification) =>
+      entities.users[notification.author].id === 
+        userId);
 
   // extract context from each notification
-  const contextArray = userNotificationIds.map((notificationId) =>
-    entities.messages[entities.notiications[notificationId].context]);
-
+  const contextArray = userNotifications.map((notification) => {
+    const messageData = entities.messages[notification.context];
+    return {
+      guid: messageData.guid,
+      isRead: messageData.isRead,
+      type: messageData.type,
+      value: messageData.value
+    };
+  });
   return contextArray;
 
   // filter the notifications based on the author id
