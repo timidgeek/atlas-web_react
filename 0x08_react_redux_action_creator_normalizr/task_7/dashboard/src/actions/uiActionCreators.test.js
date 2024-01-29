@@ -2,14 +2,16 @@
 import { login, logout, displayNotificationDrawer, hideNotificationDrawer, loginSuccess, loginFailure, loginRequest } from './uiActionCreators';
 import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE } from './uiActionTypes';
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 import axios from 'axios';
 
 // mock axios to control its behavior in tests
 jest.mock('axios');
 
 // create a mock Redux store with middleware
-const mockStore = configureMockStore([thunk]);
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+
 
 
 describe('login action creator', () => {
@@ -66,7 +68,7 @@ describe('loginRequest action creator', () => {
     ];
 
     // mock the successful API response
-    axios.get.mockResolvedValue({ data: JSON.stringify({}) });
+    axios.mockResolvedValue({ data: JSON.stringify({}) });
 
     const store = mockStore({});
     await store.dispatch(loginRequest('', ''));
@@ -81,7 +83,7 @@ describe('loginRequest action creator', () => {
     ];
 
     // mock the API failure
-    axios.get.mockRejectedValue(new Error('API request failed'));
+    axios.mockRejectedValue(new Error('API request failed'));
 
     const store = mockStore({});
     await store.dispatch(loginRequest('test@test.com', 'password'));

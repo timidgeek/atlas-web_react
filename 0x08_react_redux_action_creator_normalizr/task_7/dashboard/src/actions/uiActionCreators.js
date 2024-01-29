@@ -37,12 +37,14 @@ export const loginFailure = () => {
   };
 };
 export const loginRequest = (email, password) => async (dispatch) => {
+  dispatch(login(email, password));
   try {
-    dispatch(login(email, password));
     // fetch api
     const response = await axios.get('/login-success.json');
+    if (response.ok) {
     // if api request successful
-    dispatch(loginSuccess(response.data));
+      dispatch(loginSuccess());
+    }
   } catch (error) { // if api request failure
     dispatch(loginFailure(error.message));
   }
