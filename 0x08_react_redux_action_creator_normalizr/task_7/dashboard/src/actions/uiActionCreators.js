@@ -36,18 +36,21 @@ export const loginFailure = () => {
     type: LOGIN_FAILURE
   };
 };
-export const loginRequest = (email, password) => async (dispatch) => {
-  dispatch(login(email, password));
-  try {
-    // fetch api
-    const response = await axios.get('/login-success.json');
-    if (response.ok) {
-    // if api request successful
-      dispatch(loginSuccess());
+export const loginRequest = (email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch(login(email, password));
+      // fetch api
+      const response = await fetch('/login-success.json');
+
+      // if api request successful
+      if (response.status === 200) {
+        dispatch(loginSuccess());
+      }
+    } catch (error) { // if api request failure
+      dispatch(loginFailure(error));
     }
-  } catch (error) { // if api request failure
-    dispatch(loginFailure(error.message));
-  }
+  };
 };
 
 // export bound action creators

@@ -3,23 +3,25 @@ import { login, logout, displayNotificationDrawer, hideNotificationDrawer, login
 import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE } from './uiActionTypes';
 import configureMockStore from 'redux-mock-store';
 import { thunk } from 'redux-thunk';
-import axios from 'axios';
+import fetchMock from 'jest-fetch-mock';
 
-// mock axios to control its behavior in tests
-jest.mock('axios');
+// // mock axios to control its behavior in tests
+// jest.mock('axios');
 
 // create a mock Redux store with middleware
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+// replace axios with fetchMock
+fetchMock.enableMocks();
 
 
 describe('login action creator', () => {
   it('should return the correct action', () => {
-    const email = 'test@example.com';
-    const password = 'password123';
+    const email = 'test@test.com';
+    const password = 'password';
     const expectedAction = {
-      type: LOGIN,
+      type: 'LOGIN',
       user: {
         email,
         password
@@ -33,7 +35,7 @@ describe('login action creator', () => {
 describe('logout action creator', () => {
   it('should return the correct action', () => {
     const expectedAction = {
-      type: LOGOUT
+      type: 'LOGOUT'
     };
     const result = logout();
     expect(result).toEqual(expectedAction);
@@ -43,7 +45,7 @@ describe('logout action creator', () => {
 describe('displayNotificationDrawer action creator', () => {
   it('should return the correct action', () => {
     const expectedAction = {
-      type: DISPLAY_NOTIFICATION_DRAWER
+      type: 'DISPLAY_NOTIFICATION_DRAWER'
     };
     const result = displayNotificationDrawer();
     expect(result).toEqual(expectedAction);
@@ -53,7 +55,7 @@ describe('displayNotificationDrawer action creator', () => {
 describe('hideNotificationDrawer action creator', () => {
   it('should return the correct action', () => {
     const expectedAction = {
-      type: HIDE_NOTIFICATION_DRAWER
+      type: 'HIDE_NOTIFICATION_DRAWER'
     };
     const result = hideNotificationDrawer();
     expect(result).toEqual(expectedAction);
@@ -61,6 +63,10 @@ describe('hideNotificationDrawer action creator', () => {
 });
 
 describe('loginRequest action creator', () => {
+  afterEach(() => {
+    fetchMock.resetMocks();
+  });
+
   it('dispatches LOGIN and LOGIN_SUCCESS on successful API response', async () => {
     const expectedActions = [
       { type: LOGIN, user : { email: '', password: '' } },
@@ -68,12 +74,15 @@ describe('loginRequest action creator', () => {
     ];
 
     // mock the successful API response
-    axios.mockResolvedValue({ data: JSON.stringify({}) });
+    fetch.mockResponseOnce(JSON.stringify({}));
 
     const store = mockStore({});
-    await store.dispatch(loginRequest('', ''));
 
-    expect(store.getActions()).toEqual(expectedActions);
+    return store.dispatch(loginRequest('', ''))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+
   });
 
   it('dispatches LOGIN and LOGIN_FAILURE on API failure', async () => {
@@ -83,11 +92,15 @@ describe('loginRequest action creator', () => {
     ];
 
     // mock the API failure
-    axios.mockRejectedValue(new Error('API request failed'));
+    fetchMock.mockRejectOnce(new Error('API request failed'));
 
     const store = mockStore({});
-    await store.dispatch(loginRequest('test@test.com', 'password'));
 
-    expect(store.getActions()).toEqual(expectedActions);
+    return store.dispatch(loginRequest('test@test.com', 'password'))
+    .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+    });
+
   });
+
 });
