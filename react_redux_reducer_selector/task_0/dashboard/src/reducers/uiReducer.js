@@ -29,6 +29,10 @@ export default function uiReducer(state = initialState, action) {
       };
 
     case actionTypes.LOGIN_FAILURE:
+      return {
+        ...state,
+        isUserLoggedIn: false
+      }
     case actionTypes.LOGOUT:
       return {
         ...state,
