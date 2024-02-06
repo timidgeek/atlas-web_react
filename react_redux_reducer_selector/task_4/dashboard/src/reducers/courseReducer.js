@@ -3,7 +3,7 @@ import { Map, List, fromJS } from 'immutable';
 import { coursesNormalizer } from '../schema/courses'
 
 export const initialState = Map({
-  courses: List()
+  courses: []
 });
 
 export default function courseReducer(state =  initialState, action) {
