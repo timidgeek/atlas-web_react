@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App/App';
+import { createStore, combineReducers, Provider } from 'react-redux';
+import uiReducer from './reducers/uiReducer';
+
+// create store
+const store = createStore(uiReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store ={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
+
+export default store;
