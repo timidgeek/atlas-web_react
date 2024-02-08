@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App/App';
-import { createStore, combineReducers, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
+import {  createStore, combineReducers, } from 'redux';
 import uiReducer from './reducers/uiReducer';
 
 // create store

@@ -1,11 +1,11 @@
-import Immutable from 'immutable';
+import { Map } from 'immutable';
 import * as actionTypes from '../actions/uiActionTypes';
 
 // basic reducer
-export const initialState = Immutable.Map({
+export const initialState = Map({
   isNotificationDrawerVisible: false,
   isUserLoggedIn: false,
-  user: Immutable.Map({}) // nested map for user object
+  user: Map({}) // nested map for user object
 });
 
 export default function uiReducer(state = initialState, action) {

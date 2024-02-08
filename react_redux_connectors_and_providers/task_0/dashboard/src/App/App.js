@@ -133,9 +133,9 @@ class App extends Component {
 }
 
 // connect redux store to props
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => ({
     isLoggedIn: state.ui.isLoggedIn
-}
+})
 
 // PROP TYPES
 
