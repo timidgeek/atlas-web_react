@@ -10,6 +10,7 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext'
+import { connect } from 'react-redux';
 
 class App extends Component {
   //constructor
@@ -131,6 +132,11 @@ class App extends Component {
   }
 }
 
+// connect redux store to props
+const mapStateToProps = (state) => {
+    isLoggedIn: state.ui.isLoggedIn
+}
+
 // PROP TYPES
 
 App.propTypes = {}
@@ -179,4 +185,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
+export default connect(mapStateToProps)(App);
