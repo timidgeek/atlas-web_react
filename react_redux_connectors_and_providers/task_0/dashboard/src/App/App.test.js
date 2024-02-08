@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import App from './App';
+import { App, mapStateToProps } from './App';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
@@ -106,5 +106,22 @@ describe ('state of App Component', () =>  {
 
     expect(wrapper.state('listNotifications').length).toBe(notificationLength - 1);
     expect(wrapper.state('listNotifications').some(n => n.id === 1)).toBe(false);
+  });
 });
+
+describe('mapStateToProps', () => {
+  test('should map state to props correctly', () => {
+    // Define a mock Redux state
+    const state = {
+      ui: {
+        isLoggedIn: true // Assuming this is how your state is structured
+      }
+    };
+
+    // Call mapStateToProps with the mock state
+    const props = mapStateToProps(state);
+
+    // Check if the props contain the expected values
+    expect(props.isLoggedIn).toBe(true);
+  });
 });
