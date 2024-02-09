@@ -11,6 +11,7 @@ import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext'
 import { connect } from 'react-redux';
+import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
 
 class App extends Component {
   //constructor
@@ -66,14 +67,11 @@ class App extends Component {
 
   // drawer visibility handlers
   handleDisplayDrawer = () => {
-    this.setState({
-      displayDrawer: true
-    });
+    this.props.displayNotificationDrawer();
   }
+
   handleHideDrawer = () => {
-    this.setState({
-      displayDrawer: false 
-    });
+    this.props.hideNotificationDrawer();
   }
 
   // if ctrl+h, perform operations
@@ -138,7 +136,12 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.ui.isLoggedIn,
     displayDrawer: state.ui.isNotificationDrawerVisible
   };
-}
+};
+
+const mapDispatchToProps = {
+  displayNotificationDrawer,
+  hideNotificationDrawer
+};
 
 // PROP TYPES
 
@@ -188,4 +191,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
