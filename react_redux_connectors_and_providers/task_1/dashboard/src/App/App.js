@@ -13,31 +13,18 @@ import { AppContext } from './AppContext'
 import { connect } from 'react-redux';
 import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
 
+listCourses: [
+  { id: 1, name: "ES6", credit: 60 },
+  { id: 2, name: "Webpack", credit: 20 },
+  { id: 3, name: "React", credit: 40 },
+];
+
+listNotifications: [
+  { id: 1, type: "default", value: "New course available" },
+  { id: 2, type: "urgent", value: "New resume available" },
+  { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
+];
 class App extends Component {
-  //constructor
-  constructor(props) {
-    super(props);
-   // local state
-    this.state = {
-      displayDrawer: false,
-      user: {
-        email: '',
-        password: '',
-        isLoggedIn: false
-      },
-      logOut: () => {},
-      listCourses: [
-        { id: 1, name: "ES6", credit: 60 },
-        { id: 2, name: "Webpack", credit: 20 },
-        { id: 3, name: "React", credit: 40 },
-      ],
-      listNotifications: [
-        { id: 1, type: "default", value: "New course available" },
-        { id: 2, type: "urgent", value: "New resume available" },
-        { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
-      ]
-    };
-  }
 
   markNotificationAsRead = (id) => {
     this.setState({ // filter out notification with specified id
@@ -65,14 +52,14 @@ class App extends Component {
     });
   };
 
-  // drawer visibility handlers
-  handleDisplayDrawer = () => {
-    this.props.displayNotificationDrawer();
-  }
+  // // drawer visibility handlers
+  // handleDisplayDrawer = () => {
+  //   this.props.displayNotificationDrawer();
+  // }
 
-  handleHideDrawer = () => {
-    this.props.hideNotificationDrawer();
-  }
+  // handleHideDrawer = () => {
+  //   this.props.hideNotificationDrawer();
+  // }
 
   // if ctrl+h, perform operations
   componentDidMount() {
@@ -91,10 +78,10 @@ class App extends Component {
   // render method to handle jsx rendering
   render() {
     // initialize state
-    const { displayDrawer, user, listNotifications, listCourses } = this.props;
+    const { displayDrawer, user, listNotifications, listCourses, displayNotificationDrawer, hideNotificationDrawer, logOut } = this.props;
 
     return (
-      <AppContext.Provider value={{ user, logOut: this.logOut }}>
+      <AppContext.Provider value={{ user, logOut }}>
         <React.Fragment>
         <div className={css(styles.appHeader)}>
           <Header />
@@ -134,7 +121,9 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.ui.isLoggedIn,
-    displayDrawer: state.ui.isNotificationDrawerVisible
+    displayDrawer: state.ui.isNotificationDrawerVisible,
+    listNotifications: state.ui.notifications,
+    listCourses: state.ui.courses
   };
 };
 
@@ -143,12 +132,27 @@ const mapDispatchToProps = {
   hideNotificationDrawer
 };
 
+
 // PROP TYPES
+App.propTypes = {
+  displayDrawer: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  listNotifications: PropTypes.array.isRequired,
+  listCourses: PropTypes.array.isRequired,
+  displayNotificationDrawer: PropTypes.func.isRequired,
+  hideNotificationDrawer: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired
+};
 
-App.propTypes = {}
-
-App.defaultProps = {}
-
+App.defaultProps = {
+  user: {
+    email: '',
+    password: '',
+    isLoggedIn: false
+  },
+  listNotifications: [],
+  listCourses: []
+};
 
 // APHRODITE STYLES
 
