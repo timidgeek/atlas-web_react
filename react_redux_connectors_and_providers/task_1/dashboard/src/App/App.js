@@ -93,7 +93,7 @@ class App extends Component {
   // render method to handle jsx rendering
   render() {
     // initialize state
-    const { displayDrawer, user, listNotifications, listCourses } = this.state;
+    const { displayDrawer, user, listNotifications, listCourses } = this.props;
 
     return (
       <AppContext.Provider value={{ user, logOut: this.logOut }}>
@@ -135,7 +135,8 @@ class App extends Component {
 // connect redux store to props
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.ui.isLoggedIn
+    isLoggedIn: state.ui.isLoggedIn,
+    displayDrawer: state.ui.isNotificationDrawerVisible
   };
 }
 
